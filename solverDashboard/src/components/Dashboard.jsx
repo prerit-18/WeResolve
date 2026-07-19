@@ -28,7 +28,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
   const [selectedCategory, setSelectedCategory] = useState('Any Category');
   const [selectedSort, setSelectedSort] = useState('Nearest');
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(typeof window !== 'undefined' ? window.innerWidth >= 1024 : true);
   const [selectedPriorities, setSelectedPriorities] = useState(['High', 'Medium', 'Low']);
 
   // Request location permission on mount
@@ -408,7 +408,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-50/50 relative">
+    <div className="flex h-svh overflow-hidden bg-slate-50/50 relative">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -430,7 +430,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
         />
       </div>
       
-      <div className="flex-1 overflow-y-auto min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         {/* Header */}
         <Header
           user={user}

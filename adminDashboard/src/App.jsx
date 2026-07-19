@@ -17,7 +17,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [activeTab, setActiveTab] = useState('Dashboard');
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(typeof window !== 'undefined' ? window.innerWidth >= 1024 : true);
 
   // States for dashboard datasets
   const [stats, setStats] = useState(null);
@@ -328,7 +328,7 @@ export default function App() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-slate-50/50 relative">
+    <div className="flex h-svh overflow-hidden bg-slate-50/50 relative">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -351,7 +351,7 @@ export default function App() {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col h-screen overflow-y-auto">
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         {/* Header */}
         <Header
           user={user}

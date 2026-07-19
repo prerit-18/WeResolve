@@ -29,7 +29,7 @@ function App() {
   const [nearby, setNearby] = useState([])
   const [activeTab, setActiveTab] = useState('Dashboard')
   const [location, setLocation] = useState(null)
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(typeof window !== 'undefined' ? window.innerWidth >= 1024 : true)
 
   // Request location permission on mount
   useEffect(() => {
