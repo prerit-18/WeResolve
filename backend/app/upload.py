@@ -1,6 +1,5 @@
 import os
-import shutil
-import uuid
+import base64
 import cloudinary
 import cloudinary.uploader
 from fastapi import UploadFile
@@ -30,21 +29,17 @@ async def upload_image(file: UploadFile) -> str:
             result = cloudinary.uploader.upload(file.file)
             return result.get("secure_url")
         except Exception as e:
-            # Fallback to local if Cloudinary fails
-            print(f"Cloudinary upload failed: {e}. Falling back to local storage.")
+            # Fallback to base64 if Cloudinary fails
+            print(f"Cloudinary upload failed: {e}. Falling back to in-memory Base64 encoding.")
     
-    # Local Storage Fallback
-    upload_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "static", "uploads")
-    os.makedirs(upload_dir, exist_ok=True)
-    
-    # Generate unique filename
-    file_extension = os.path.splitext(file.filename)[1] or ".png"
-    unique_filename = f"{uuid.uuid4()}{file_extension}"
-    file_path = os.path.join(upload_dir, unique_filename)
-    
-    # Write to local directory
-    with open(file_path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
-        
-    # Return local URL matching mounted StaticFiles
-    return f"http://localhost:8000/uploads/{unique_filename}"
+    # In-memory Base64 encoding fallback (does not store files locally)
+    try:
+        contents = await file.read()
+        await file.seek(0)
+        encoded = base64.b64encode(contents).decode("utf-8")
+        content_type = file.content_type or "image/png"
+        return f"data:{content_type};base64,{encoded}"
+    except Exception as e:
+        print(f"Failed to read and encode file: {e}")
+        raise e
+

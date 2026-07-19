@@ -16,7 +16,10 @@ app = FastAPI(title="WeResolve API", version="1.0.0")
 # Setup CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex="https?://.*",
+    allow_origins=[
+        "http://localhost:5173",
+        "https://weresolve.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
