@@ -25,7 +25,7 @@ To build a platform where every citizen can contribute to solving real-world pro
 
 - React
 - FastAPI
-- PostgreSQL
+- MongoDB
 - Python
 - AI/ML
 ---
