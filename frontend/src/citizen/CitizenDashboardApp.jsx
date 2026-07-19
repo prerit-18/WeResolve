@@ -66,7 +66,7 @@ function App() {
         const withDistance = filtered.map(i => ({
           ...i,
           distance: getDistance(loc.latitude, loc.longitude, i.latitude, i.longitude)
-        })).sort((a, b) => a.distance - b.distance);
+        })).filter(i => i.distance <= 100).sort((a, b) => a.distance - b.distance);
         setNearby(withDistance);
       } else {
         setNearby(filtered);
@@ -82,7 +82,7 @@ function App() {
       const withDistance = nearby.map(i => ({
         ...i,
         distance: getDistance(location.latitude, location.longitude, i.latitude, i.longitude)
-      })).sort((a, b) => a.distance - b.distance);
+      })).filter(i => i.distance <= 100).sort((a, b) => a.distance - b.distance);
       setNearby(withDistance);
     }
   }, [location, user]);
