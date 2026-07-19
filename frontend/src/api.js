@@ -79,4 +79,8 @@ export const adminApi = {
     method: 'POST',
   }),
   getAlerts: () => apiCall('/admin/alerts'),
+  getUsers: (role) => {
+    const query = role ? `?role=${role}` : '';
+    return apiCall(`/admin/users${query}`);
+  },
 };

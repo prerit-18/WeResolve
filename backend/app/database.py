@@ -25,7 +25,13 @@ Base = declarative_base()
 # Mongo Setup
 mongo_client = None
 if DATABASE_TYPE == "mongodb":
-    mongo_client = MongoClient(MONGODB_URI)
+    kwargs = {}
+    try:
+        import certifi
+        kwargs["tlsCAFile"] = certifi.where()
+    except ImportError:
+        pass
+    mongo_client = MongoClient(MONGODB_URI, **kwargs)
 
 def get_db():
     if DATABASE_TYPE == "mongodb":

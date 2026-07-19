@@ -40,20 +40,6 @@ export default function Login() {
 
   const currentStyle = ROLE_CONFIG[activeTab];
 
-  const handleQuickSeed = (role) => {
-    const seedCreds = {
-      admin: { email: 'admin@weresolve.gov', pass: 'admin123' },
-      solver: { email: 'arjun@weresolve.org', pass: 'solver123' },
-      citizen: { email: 'citizen@weresolve.org', pass: 'citizen123' }
-    };
-    const creds = seedCreds[role];
-    if (creds) {
-      setEmail(creds.email);
-      setPassword(creds.pass);
-      setActiveTab(role);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -90,10 +76,10 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0f19] flex flex-col justify-between font-sans relative overflow-hidden text-slate-300">
-      {/* Background Decorative Rings */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 right-1/4 w-[450px] h-[450px] bg-purple-500/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div 
+      className="min-h-screen bg-[#0b0f19] bg-cover bg-center bg-no-repeat flex flex-col justify-between font-sans relative overflow-hidden text-slate-300"
+      style={{ backgroundImage: "url('/login-bg.jpg')" }}
+    >
 
       {/* Header */}
       <header className="max-w-7xl mx-auto w-full px-6 py-6 flex justify-between items-center z-10 border-b border-slate-900/60">
@@ -190,37 +176,6 @@ export default function Login() {
                   className={`w-full pl-10 pr-4 py-3 bg-[#1f2937]/60 border border-slate-800 rounded-xl text-sm font-semibold text-white outline-none transition-all duration-300 focus:outline-none ${currentStyle.borderFocus}`}
                 />
               </div>
-            </div>
-
-            {/* Quick Seeds */}
-            <div className="bg-[#1f2937]/30 border border-slate-800/80 rounded-2xl p-4 text-[11px] text-slate-400 leading-normal">
-              <div className="flex justify-between items-center mb-1">
-                <span className="font-bold text-slate-300">💡 Quick Seed Autocomplete:</span>
-              </div>
-              <p className="mt-1 flex flex-wrap gap-1.5 items-center">
-                Fill as:{' '}
-                <button
-                  type="button"
-                  onClick={() => handleQuickSeed('citizen')}
-                  className="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 font-extrabold border border-indigo-500/20 hover:bg-indigo-500/20 transition"
-                >
-                  Citizen
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleQuickSeed('solver')}
-                  className="px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 font-extrabold border border-purple-500/20 hover:bg-purple-500/20 transition"
-                >
-                  Solver
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleQuickSeed('admin')}
-                  className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 font-extrabold border border-blue-500/20 hover:bg-blue-500/20 transition"
-                >
-                  Admin
-                </button>
-              </p>
             </div>
 
             <button

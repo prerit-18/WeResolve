@@ -75,21 +75,6 @@ export default function Sidebar({ className = '', activeTab, setActiveTab, onLog
           )
         })}
       </nav>
-
-      {/* Impact card */}
-      <div className="m-4 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-600 p-5 text-white">
-        <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/15">
-          <Sparkles className="h-4 w-4" strokeWidth={2.2} />
-        </div>
-        <p className="text-sm font-semibold">Your Impact</p>
-        <p className="mt-1 text-[13px] leading-snug text-brand-50/90">
-          You&apos;ve reported issues and helped your city!
-        </p>
-        <button className="mt-4 flex w-full items-center justify-center gap-1 rounded-lg bg-white/15 py-2 text-[13px] font-medium text-white transition-colors hover:bg-white/25">
-          View Impact
-          <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.5} />
-        </button>
-      </div>
     </aside>
   )
 }
