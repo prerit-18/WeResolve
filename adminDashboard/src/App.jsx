@@ -17,6 +17,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [activeTab, setActiveTab] = useState('Dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   // States for dashboard datasets
   const [stats, setStats] = useState(null);
@@ -327,14 +328,37 @@ export default function App() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-slate-50/50">
+    <div className="flex h-screen overflow-hidden bg-slate-50/50 relative">
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-20 bg-black/30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Left Sidebar */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={handleLogout} />
+      <div
+        className={`fixed inset-y-0 left-0 z-30 transition-transform duration-300 ease-in-out lg:static lg:z-auto ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <Sidebar
+          activeTab={activeTab}
+          setActiveTab={(tab) => { setActiveTab(tab); if (window.innerWidth < 1024) setSidebarOpen(false); }}
+          onLogout={handleLogout}
+        />
+      </div>
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col h-screen overflow-y-auto">
         {/* Header */}
-        <Header user={user} onLogout={handleLogout} onNotificationClick={() => setActiveTab('Activity Logs')} />
+        <Header
+          user={user}
+          onLogout={handleLogout}
+          onMenuClick={() => setSidebarOpen(o => !o)}
+          onNotificationClick={() => setActiveTab('Activity Logs')}
+        />
 
         {/* Stats Summary Row */}
         <StatsCards stats={stats} />

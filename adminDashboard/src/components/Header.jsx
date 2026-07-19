@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Calendar, Bell, ChevronDown, LogOut } from 'lucide-react';
+import { Calendar, Bell, ChevronDown, LogOut, Menu } from 'lucide-react';
 
-export default function Header({ user, onNotificationClick, onLogout }) {
+export default function Header({ user, onNotificationClick, onMenuClick, onLogout }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const name = user?.full_name || 'Admin';
   const avatar = user?.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=100';
@@ -10,9 +10,18 @@ export default function Header({ user, onNotificationClick, onLogout }) {
     <div className="px-8 py-6">
       <div className="flex items-center justify-between">
         {/* Left Titles */}
-        <div>
-          <h1 className="text-3xl font-black text-slate-900 tracking-tight leading-none">Dashboard</h1>
-          <p className="text-slate-500 font-medium mt-2 text-xs">Overview of city issues and platform activity</p>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onMenuClick}
+            className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 transition"
+            aria-label="Toggle sidebar"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+          <div>
+            <h1 className="text-3xl font-black text-slate-900 tracking-tight leading-none">Dashboard</h1>
+            <p className="text-slate-500 font-medium mt-2 text-xs">Overview of city issues and platform activity</p>
+          </div>
         </div>
 
         {/* Right Actions */}

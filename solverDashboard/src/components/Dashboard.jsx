@@ -28,6 +28,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
   const [selectedCategory, setSelectedCategory] = useState('Any Category');
   const [selectedSort, setSelectedSort] = useState('Nearest');
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [selectedPriorities, setSelectedPriorities] = useState(['High', 'Medium', 'Low']);
 
   // Request location permission on mount
@@ -407,13 +408,37 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-50/50">
+    <div className="flex min-h-screen bg-slate-50/50 relative">
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-20 bg-black/30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={onLogout} />
+      <div
+        className={`fixed inset-y-0 left-0 z-30 transition-transform duration-300 ease-in-out lg:static lg:z-auto ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <Sidebar
+          activeTab={activeTab}
+          setActiveTab={(tab) => { setActiveTab(tab); if (window.innerWidth < 1024) setSidebarOpen(false); }}
+          onLogout={onLogout}
+        />
+      </div>
       
       <div className="flex-1 overflow-y-auto">
         {/* Header */}
-        <Header user={user} location={location} onLogout={onLogout} onNotificationClick={() => setActiveTab('Notifications')} />
+        <Header
+          user={user}
+          location={location}
+          onLogout={onLogout}
+          onMenuClick={() => setSidebarOpen(o => !o)}
+          onNotificationClick={() => setActiveTab('Notifications')}
+        />
         
         <main className="px-8 pb-8 space-y-6">
           {/* Stats Section */}

@@ -29,6 +29,7 @@ function App() {
   const [nearby, setNearby] = useState([])
   const [activeTab, setActiveTab] = useState('Dashboard')
   const [location, setLocation] = useState(null)
+  const [sidebarOpen, setSidebarOpen] = useState(true)
 
   // Request location permission on mount
   useEffect(() => {
@@ -278,18 +279,38 @@ function App() {
   }
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
-      {/* Desktop sidebar */}
-      <Sidebar 
-        className="hidden lg:flex" 
-        activeTab={activeTab} 
-        setActiveTab={setActiveTab} 
-        onLogout={handleLogout} 
-      />
+    <div className="flex min-h-screen bg-slate-50 relative">
+      {/* Sidebar overlay for mobile */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-20 bg-black/30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div
+        className={`fixed inset-y-0 left-0 z-30 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 lg:z-auto ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:-translate-x-full'
+        }`}
+      >
+        <Sidebar
+          className="flex"
+          activeTab={activeTab}
+          setActiveTab={(tab) => { setActiveTab(tab); if (window.innerWidth < 1024) setSidebarOpen(false); }}
+          onLogout={handleLogout}
+        />
+      </div>
 
       <main className="min-w-0 flex-1">
         <div className="mx-auto max-w-[1400px] space-y-6 px-4 py-6 sm:px-6 lg:px-8">
-          <Header user={user} location={location} onLogout={handleLogout} onNotificationClick={() => setActiveTab('Notifications')} />
+          <Header
+            user={user}
+            location={location}
+            onLogout={handleLogout}
+            onMenuClick={() => setSidebarOpen(o => !o)}
+            onNotificationClick={() => setActiveTab('Notifications')}
+          />
           
           <div className="space-y-6">
             {renderContent()}

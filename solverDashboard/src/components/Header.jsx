@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { MapPin, Bell, ChevronDown, LogOut } from 'lucide-react';
+import { MapPin, Bell, ChevronDown, LogOut, Menu } from 'lucide-react';
 
-export default function Header({ user, location, onNotificationClick, onLogout }) {
+export default function Header({ user, location, onNotificationClick, onMenuClick, onLogout }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const name = user?.full_name || 'Arjun Kumar';
   const avatar = user?.avatar || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100';
@@ -18,11 +18,20 @@ export default function Header({ user, location, onNotificationClick, onLogout }
   return (
     <div className="px-8 py-6">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-black text-slate-900 tracking-tight flex items-center gap-2">
-            Welcome, {name.split(' ')[0]} <span className="animate-bounce">👋</span>
-          </h1>
-          <p className="text-slate-500 font-medium mt-1">Let's solve more issues and create impact.</p>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onMenuClick}
+            className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 transition"
+            aria-label="Toggle sidebar"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+          <div>
+            <h1 className="text-3xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+              Welcome, {name.split(' ')[0]} <span className="animate-bounce">👋</span>
+            </h1>
+            <p className="text-slate-500 font-medium mt-1">Let's solve more issues and create impact.</p>
+          </div>
         </div>
 
         <div className="flex items-center gap-6">

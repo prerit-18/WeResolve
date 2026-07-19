@@ -20,12 +20,11 @@ export default function Header({ user, location, onMenuClick, onNotificationClic
       <div className="flex items-center gap-3">
         <button
           onClick={onMenuClick}
-          className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 lg:hidden"
-          aria-label="Open menu"
+          className="rounded-lg p-2 text-slate-500 hover:bg-slate-100"
+          aria-label="Toggle sidebar"
         >
           <Menu className="h-5 w-5" />
         </button>
-        <Menu className="hidden h-5 w-5 text-slate-400 lg:block" strokeWidth={2} />
         <div>
           <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">
             Welcome, {name.split(' ')[0]} <span aria-hidden>👋</span>
