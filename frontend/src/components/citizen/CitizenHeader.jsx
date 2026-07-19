@@ -34,7 +34,7 @@ export default function Header({ user, location, onMenuClick, onNotificationClic
       </div>
 
       <div className="flex items-center gap-3">
-        <button className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm text-slate-600 shadow-sm hover:border-slate-300">
+        <button className="hidden sm:flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm text-slate-600 shadow-sm hover:border-slate-300">
           <MapPin className="h-4 w-4 text-brand-500" strokeWidth={2.2} />
           <span className="font-medium">{displayLocation}</span>
           <ChevronDown className="h-4 w-4 text-slate-400" strokeWidth={2.2} />

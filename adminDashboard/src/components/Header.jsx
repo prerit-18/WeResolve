@@ -7,27 +7,27 @@ export default function Header({ user, onNotificationClick, onMenuClick, onLogou
   const avatar = user?.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=100';
 
   return (
-    <div className="px-8 py-6">
-      <div className="flex items-center justify-between">
+    <div className="px-4 sm:px-6 md:px-8 py-4 md:py-6">
+      <div className="flex items-center justify-between gap-3">
         {/* Left Titles */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 min-w-0">
           <button
             onClick={onMenuClick}
-            className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 transition"
+            className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 transition shrink-0"
             aria-label="Toggle sidebar"
           >
             <Menu className="h-5 w-5" />
           </button>
-          <div>
-            <h1 className="text-3xl font-black text-slate-900 tracking-tight leading-none">Dashboard</h1>
-            <p className="text-slate-500 font-medium mt-2 text-xs">Overview of city issues and platform activity</p>
+          <div className="min-w-0">
+            <h1 className="text-xl md:text-3xl font-black text-slate-900 tracking-tight leading-none truncate">Dashboard</h1>
+            <p className="text-slate-500 font-medium mt-1 text-xs hidden sm:block">Overview of city issues and platform activity</p>
           </div>
         </div>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-4">
-          {/* Date Picker */}
-          <div className="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200/80 rounded-xl shadow-sm cursor-pointer hover:bg-slate-50 transition duration-150">
+        <div className="flex items-center gap-2 md:gap-4 shrink-0">
+          {/* Date Picker — hidden on mobile */}
+          <div className="hidden md:flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200/80 rounded-xl shadow-sm cursor-pointer hover:bg-slate-50 transition duration-150">
             <Calendar className="w-4 h-4 text-slate-400" />
             <span className="text-slate-700 font-bold text-xs">
               {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
@@ -50,15 +50,15 @@ export default function Header({ user, onNotificationClick, onMenuClick, onLogou
           <div className="relative">
             <div 
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-3 pl-5 border-l border-slate-200 cursor-pointer hover:opacity-85 transition"
+              className="flex items-center gap-2 md:gap-3 pl-3 md:pl-5 border-l border-slate-200 cursor-pointer hover:opacity-85 transition"
               title="Profile Options"
             >
               <img
                 src={avatar}
                 alt={name}
-                className="w-10 h-10 rounded-full object-cover border border-slate-200 shadow-sm"
+                className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border border-slate-200 shadow-sm"
               />
-              <div className="leading-tight flex items-center gap-1">
+              <div className="leading-tight hidden md:flex items-center gap-1">
                 <div>
                   <p className="font-bold text-slate-950 text-sm truncate max-w-[100px]">{name}</p>
                   <p className="text-[10px] text-blue-600 font-black tracking-wide mt-0.5">Super Admin</p>

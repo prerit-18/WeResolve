@@ -37,33 +37,33 @@ export default function StatsCards({ stats }) {
   ];
 
   return (
-    <div className="grid grid-cols-4 gap-5 px-8 mb-6">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 px-4 sm:px-6 md:px-8 mb-6">
       {cards.map((card, idx) => (
-        <div key={idx} className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4 hover:shadow-md transition duration-200">
+        <div key={idx} className="bg-white p-4 md:p-5 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-3 md:gap-4 hover:shadow-md transition duration-200">
           {/* Icon container */}
-          <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border ${card.color}`}>
-            <card.icon className="w-6 h-6" strokeWidth={2.2} />
+          <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center shrink-0 border ${card.color}`}>
+            <card.icon className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2.2} />
           </div>
 
           {/* Details */}
           <div>
-            <p className="text-[11px] font-black text-slate-400 uppercase tracking-wider">{card.label}</p>
-            <p className="text-2xl font-black text-slate-900 mt-1 leading-none tracking-tight">{card.value}</p>
+            <p className="text-[10px] md:text-[11px] font-black text-slate-400 uppercase tracking-wider">{card.label}</p>
+            <p className="text-xl md:text-2xl font-black text-slate-900 mt-1 leading-none tracking-tight">{card.value}</p>
             
             {/* Trend info */}
-            <div className="flex items-center gap-1 mt-1.5 text-[11px] font-bold">
+            <div className="flex items-center gap-1 mt-1.5 text-[10px] md:text-[11px] font-bold">
               {card.isTrendUp ? (
                 <>
-                  <TrendingUp className="w-3.5 h-3.5 text-green-600" />
+                  <TrendingUp className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600" />
                   <span className="text-green-600">{card.trend}</span>
                 </>
               ) : (
                 <>
-                  <TrendingDown className="w-3.5 h-3.5 text-red-600" />
+                  <TrendingDown className="w-3 h-3 md:w-3.5 md:h-3.5 text-red-600" />
                   <span className="text-red-600">{card.trend}</span>
                 </>
               )}
-              <span className="text-slate-400">from last week</span>
+              <span className="text-slate-400 hidden sm:inline">from last week</span>
             </div>
           </div>
         </div>

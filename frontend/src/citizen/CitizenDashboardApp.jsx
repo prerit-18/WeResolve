@@ -141,18 +141,18 @@ function App() {
       case 'Dashboard':
         return (
           <>
-            <div className="grid grid-cols-1 gap-6 xl:grid-cols-5">
-              <div className="xl:col-span-2">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
+              <div className="lg:col-span-2">
                 <ReportNewIssue location={location} onReportSubmitted={handleNewReport} />
               </div>
-              <div className="xl:col-span-3">
+              <div className="lg:col-span-3">
                 <IssueHeatmap issues={reports} />
               </div>
             </div>
 
             <StatsRow reports={reports} user={user} />
 
-            <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <MyReports reports={reports} onViewAll={() => setActiveTab('My Reports')} />
               <NearbyIssues issues={nearby} onViewAll={() => setActiveTab('Nearby Issues')} />
             </div>

@@ -140,11 +140,11 @@ export default function App() {
     switch (activeTab) {
       case 'Dashboard':
         return (
-          <div className="grid grid-cols-3 gap-6 items-start">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 items-start">
             {/* Left 2/3 Area */}
-            <div className="col-span-2 space-y-6">
+            <div className="col-span-1 xl:col-span-2 space-y-6">
               {/* Charts Subgrid */}
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <IssuesOverTime data={issuesOverTime} />
                 <CategoryDistribution data={categories} />
               </div>
@@ -241,7 +241,7 @@ export default function App() {
       case 'Reports & Analytics':
         return (
           <div className="max-w-5xl mx-auto space-y-6">
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <IssuesOverTime data={issuesOverTime} />
               <CategoryDistribution data={categories} />
             </div>
@@ -288,7 +288,7 @@ export default function App() {
         return (
           <div className="max-w-xl mx-auto bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
             <h3 className="text-base font-bold text-slate-900 mb-4">Corporate Sponsors</h3>
-            <div className="grid grid-cols-2 gap-4 text-xs font-bold text-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-bold text-center">
               <div className="p-4 border rounded-xl">TATA Civic Foundation</div>
               <div className="p-4 border rounded-xl">Infosys Community Grant</div>
             </div>
@@ -364,7 +364,7 @@ export default function App() {
         <StatsCards stats={stats} />
 
         {/* Dash Grid */}
-        <main className="px-8 pb-8">
+        <main className="px-4 sm:px-6 md:px-8 pb-8">
           <div className="mt-4">
             {renderContent()}
           </div>

@@ -36,7 +36,7 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
   ];
 
   return (
-    <div className="w-64 bg-[#0f172a] text-slate-400 p-5 flex flex-col shrink-0 h-screen border-r border-slate-800">
+    <div className="w-64 bg-[#0f172a] text-slate-400 p-5 flex flex-col shrink-0 h-screen border-r border-slate-800 overflow-y-auto">
       {/* Brand Logo */}
       <div className="flex items-center gap-3 px-2 mb-8">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 shadow-lg shadow-blue-500/20">
