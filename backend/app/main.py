@@ -22,6 +22,7 @@ app.add_middleware(
         "http://localhost:5175",
         "https://we-resolve.vercel.app",
     ],
+    allow_origin_regex=r"https?://(localhost:\d+|.*\.vercel\.app)",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
