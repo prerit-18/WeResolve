@@ -1,37 +1,22 @@
-import datetime
 from fastapi import APIRouter, Depends, HTTPException, status, Query
-from sqlalchemy.orm import Session
 from typing import List, Optional
 from ..database import get_db
-from .. import models, schemas, auth
+from ..repositories.base import BaseRepository
+from .. import schemas, auth
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
 @router.get("/stats", response_model=schemas.AdminStats)
 def get_stats(
-    current_user: models.User = Depends(auth.get_current_active_role(["admin"])),
-    db: Session = Depends(get_db)
+    current_user = Depends(auth.get_current_active_role(["admin"])),
+    db: BaseRepository = Depends(get_db)
 ):
-    total = db.query(models.Issue).count()
-    in_progress = db.query(models.Issue).filter(models.Issue.status == "In Progress").count()
-    resolved = db.query(models.Issue).filter(models.Issue.status == "Resolved").count()
-    high_priority = db.query(models.Issue).filter(models.Issue.priority == "High").count()
-    
-    return {
-        "total_issues": total,
-        "total_issues_change": "+12.5% from last week",
-        "in_progress": in_progress,
-        "in_progress_change": "+8.3% from last week",
-        "resolved": resolved,
-        "resolved_change": "+15.7% from last week",
-        "high_priority": high_priority,
-        "high_priority_change": "-3.2% from last week"
-    }
+    return db.get_admin_stats()
 
 @router.get("/charts/issues-over-time", response_model=List[schemas.ChartPoint])
 def get_issues_over_time(
-    current_user: models.User = Depends(auth.get_current_active_role(["admin"])),
-    db: Session = Depends(get_db)
+    current_user = Depends(auth.get_current_active_role(["admin"])),
+    db: BaseRepository = Depends(get_db)
 ):
     # Hardcoded coordinates matching mockup labels for visual exactness
     return [
@@ -46,21 +31,19 @@ def get_issues_over_time(
 
 @router.get("/charts/categories", response_model=List[schemas.CategoryData])
 def get_categories_chart(
-    current_user: models.User = Depends(auth.get_current_active_role(["admin"])),
-    db: Session = Depends(get_db)
+    current_user = Depends(auth.get_current_active_role(["admin"])),
+    db: BaseRepository = Depends(get_db)
 ):
-    # Match percentage calculations from mockup
-    total = db.query(models.Issue).count() or 1
+    issues = db.get_issues()
+    total = len(issues) or 1
     
-    # In a real app we'd query categories, but for mockup alignment we'll match counts:
-    # Road Damage, Garbage, Water Supply, Street Light, Others
-    road_cnt = db.query(models.Issue).filter(models.Issue.category == "Road Damage").count()
-    garbage_cnt = db.query(models.Issue).filter(models.Issue.category == "Garbage").count()
-    water_cnt = db.query(models.Issue).filter(models.Issue.category == "Water Supply").count()
-    light_cnt = db.query(models.Issue).filter(models.Issue.category == "Street Light").count()
-    others_cnt = db.query(models.Issue).filter(models.Issue.category == "Others").count()
+    # Categories: Road Damage, Garbage, Water Supply, Street Light, Others
+    road_cnt = sum(1 for i in issues if i.category == "Road Damage")
+    garbage_cnt = sum(1 for i in issues if i.category == "Garbage")
+    water_cnt = sum(1 for i in issues if i.category == "Water Supply")
+    light_cnt = sum(1 for i in issues if i.category == "Street Light")
+    others_cnt = sum(1 for i in issues if i.category == "Others")
 
-    # If database has zero, return mockup sample
     if total <= 5:
         return [
             {"label": "Road & Infrastructure", "percentage": "38%", "count": 474},
@@ -80,12 +63,13 @@ def get_categories_chart(
 
 @router.get("/charts/priorities", response_model=List[schemas.PriorityData])
 def get_priorities_chart(
-    current_user: models.User = Depends(auth.get_current_active_role(["admin"])),
-    db: Session = Depends(get_db)
+    current_user = Depends(auth.get_current_active_role(["admin"])),
+    db: BaseRepository = Depends(get_db)
 ):
-    high = db.query(models.Issue).filter(models.Issue.priority == "High").count()
-    medium = db.query(models.Issue).filter(models.Issue.priority == "Medium").count()
-    low = db.query(models.Issue).filter(models.Issue.priority == "Low").count()
+    issues = db.get_issues()
+    high = sum(1 for i in issues if i.priority == "High")
+    medium = sum(1 for i in issues if i.priority == "Medium")
+    low = sum(1 for i in issues if i.priority == "Low")
 
     if (high + medium + low) <= 5:
         return [
@@ -102,19 +86,19 @@ def get_priorities_chart(
 
 @router.get("/verifications", response_model=List[schemas.TaskResponse])
 def get_pending_verifications(
-    current_user: models.User = Depends(auth.get_current_active_role(["admin"])),
-    db: Session = Depends(get_db)
+    current_user = Depends(auth.get_current_active_role(["admin"])),
+    db: BaseRepository = Depends(get_db)
 ):
-    return db.query(models.Task).filter(models.Task.status == "Completed").order_by(models.Task.completed_at.desc()).all()
+    return db.get_pending_verifications()
 
 @router.post("/verifications/{task_id}/verify")
 def verify_task_proof(
     task_id: int,
     action: str = Query(..., regex="^(approve|reject)$"),
-    current_user: models.User = Depends(auth.get_current_active_role(["admin"])),
-    db: Session = Depends(get_db)
+    current_user = Depends(auth.get_current_active_role(["admin"])),
+    db: BaseRepository = Depends(get_db)
 ):
-    task = db.query(models.Task).filter(models.Task.id == task_id).first()
+    task = db.get_task_by_id(task_id)
     if not task:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -126,76 +110,19 @@ def verify_task_proof(
             detail="Task is not completed/pending verification"
         )
         
-    issue = task.issue
-    solver = task.solver
-    
-    if action == "approve":
-        task.status = "Approved"
-        issue.status = "Resolved"
-        
-        # Award flat 50 credits to the solver on solving the problem
-        credit_reward = 50
-            
-        solver.credits += credit_reward
-        solver.xp += 50
-        
-        # Check level up (every 100 XP)
-        if solver.xp >= solver.level * 100:
-            solver.level += 1
-            
-        # Create notifications
-        db.add(models.Notification(
-            user_id=solver.id,
-            title="Proof Approved!",
-            message=f"Your resolution proof for '{issue.title}' has been approved. You earned {credit_reward} credits and 50 XP!",
-        ))
-        db.add(models.Notification(
-            user_id=issue.citizen_id,
-            title="Issue Resolved",
-            message=f"The issue you reported '{issue.title}' has been resolved and verified.",
-        ))
-        
-        # Create alert
-        db.add(models.Alert(
-            text=f"Issue #UP-{issue.id} marked as resolved",
-            type="success",
-            time_ago="Just now"
-        ))
-        
-    else: # reject
-        task.status = "Rejected"
-        issue.status = "In Progress" # Put it back in progress for the solver
-        
-        db.add(models.Notification(
-            user_id=solver.id,
-            title="Proof Rejected",
-            message=f"Your resolution proof for '{issue.title}' was rejected by the admin. Please check the site and submit again.",
-        ))
-        
-        # Create alert
-        db.add(models.Alert(
-            text=f"Verification rejected for issue #{issue.id}",
-            type="danger",
-            time_ago="Just now"
-        ))
-        
-    db.commit()
-    return {"status": "success", "task_status": task.status, "issue_status": issue.status}
+    return db.verify_task_proof(task_id, action)
 
 @router.get("/alerts", response_model=List[schemas.AlertResponse])
 def get_alerts(
-    current_user: models.User = Depends(auth.get_current_active_role(["admin"])),
-    db: Session = Depends(get_db)
+    current_user = Depends(auth.get_current_active_role(["admin"])),
+    db: BaseRepository = Depends(get_db)
 ):
-    return db.query(models.Alert).order_by(models.Alert.created_at.desc()).limit(15).all()
+    return db.get_alerts(15)
 
 @router.get("/users", response_model=List[schemas.UserResponse])
 def get_users(
     role: Optional[str] = None,
-    current_user: models.User = Depends(auth.get_current_active_role(["admin"])),
-    db: Session = Depends(get_db)
+    current_user = Depends(auth.get_current_active_role(["admin"])),
+    db: BaseRepository = Depends(get_db)
 ):
-    query = db.query(models.User)
-    if role:
-        query = query.filter(models.User.role == role)
-    return query.all()
+    return db.get_users(role)

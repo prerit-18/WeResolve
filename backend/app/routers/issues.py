@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Form
-from sqlalchemy.orm import Session
 from typing import List, Optional
 from ..database import get_db
-from .. import models, schemas, auth, upload
+from ..repositories.base import BaseRepository
+from .. import schemas, auth, upload
 
 router = APIRouter(prefix="/issues", tags=["issues"])
 
@@ -15,12 +15,12 @@ async def create_issue(
     latitude: float = Form(...),
     longitude: float = Form(...),
     image: UploadFile = File(...),
-    current_user: models.User = Depends(auth.get_current_active_role(["citizen"])),
-    db: Session = Depends(get_db)
+    current_user = Depends(auth.get_current_active_role(["citizen"])),
+    db: BaseRepository = Depends(get_db)
 ):
     image_url = await upload.upload_image(image)
     
-    new_issue = models.Issue(
+    new_issue = db.create_issue(
         citizen_id=current_user.id,
         title=title,
         description=description,
@@ -28,61 +28,50 @@ async def create_issue(
         priority=priority,
         latitude=latitude,
         longitude=longitude,
-        image_url=image_url,
-        status="Pending"
+        image_url=image_url
     )
-    db.add(new_issue)
     
     # Award 10 credits to citizen for reporting a problem
-    current_user.credits += 10
+    db.update_user_profile(current_user.id, {"credits": current_user.credits + 10})
     
     # Create notification
-    notification = models.Notification(
+    db.create_notification(
         user_id=current_user.id,
         title="Issue Reported Successfully",
         message=f"Your report for '{title}' has been submitted and is pending verification.",
     )
-    db.add(notification)
     
     # Create admin alert
-    alert = models.Alert(
-        text=f"New issue reported in {title.split('on')[-1].strip() if 'on' in title else 'the city'}",
+    alert_text = f"New issue reported in {title.split('on')[-1].strip() if 'on' in title else 'the city'}"
+    db.create_alert(
+        text=alert_text,
         type="warning",
         time_ago="Just now"
     )
-    db.add(alert)
     
-    db.commit()
-    db.refresh(new_issue)
-    return new_issue
+    # Refetch the issue to ensure loaded relationships are populated correctly
+    refetched = db.get_issue_by_id(new_issue.id)
+    return refetched
 
 @router.get("/", response_model=List[schemas.IssueResponse])
 def get_issues(
     status: Optional[str] = None,
     category: Optional[str] = None,
     priority: Optional[str] = None,
-    db: Session = Depends(get_db)
+    db: BaseRepository = Depends(get_db)
 ):
-    query = db.query(models.Issue)
-    if status:
-        query = query.filter(models.Issue.status == status)
-    if category:
-        query = query.filter(models.Issue.category == category)
-    if priority:
-        query = query.filter(models.Issue.priority == priority)
-    return query.order_by(models.Issue.created_at.desc()).all()
+    return db.get_issues(status=status, category=category, priority=priority)
 
 @router.get("/my-reports", response_model=List[schemas.IssueResponse])
 def get_my_reports(
-    current_user: models.User = Depends(auth.get_current_active_role(["citizen"])),
-    db: Session = Depends(get_db)
+    current_user = Depends(auth.get_current_active_role(["citizen"])),
+    db: BaseRepository = Depends(get_db)
 ):
-    return db.query(models.Issue).filter(models.Issue.citizen_id == current_user.id).order_by(models.Issue.created_at.desc()).all()
+    return db.get_issues_by_citizen(current_user.id)
 
 @router.get("/available", response_model=List[schemas.IssueResponse])
 def get_available_issues(
-    current_user: models.User = Depends(auth.get_current_active_role(["solver"])),
-    db: Session = Depends(get_db)
+    current_user = Depends(auth.get_current_active_role(["solver"])),
+    db: BaseRepository = Depends(get_db)
 ):
-    # Solver can see reported issues (status: Pending/reported) that are not accepted yet
-    return db.query(models.Issue).filter(models.Issue.status == "Pending").order_by(models.Issue.created_at.desc()).all()
+    return db.get_available_issues()

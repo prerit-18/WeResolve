@@ -4,18 +4,19 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 
-from .database import engine, Base
+from .database import engine, Base, DATABASE_TYPE
 from .routers import auth, issues, tasks, admin
 
 # Create tables
-Base.metadata.create_all(bind=engine)
+if DATABASE_TYPE != "mongodb":
+    Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="WeResolve API", version="1.0.0")
 
 # Setup CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origin_regex="https?://.*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
