@@ -59,9 +59,17 @@ export default function NearbyIssues({ issues = [], onViewAll }) {
 
             return (
               <li key={issue.id} className="flex items-center gap-3 py-3.5 first:pt-2">
-                <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${bg}`}>
-                  <Icon className={`h-5 w-5 ${color}`} strokeWidth={2} />
-                </div>
+                {issue.image_url ? (
+                  <img
+                    src={issue.image_url}
+                    alt={issue.title}
+                    className="h-11 w-11 shrink-0 rounded-xl object-cover border border-slate-100 shadow-sm"
+                  />
+                ) : (
+                  <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${bg}`}>
+                    <Icon className={`h-5 w-5 ${color}`} strokeWidth={2} />
+                  </div>
+                )}
 
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold text-slate-800 leading-snug">{issue.title}</p>
