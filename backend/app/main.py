@@ -18,7 +18,9 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://weresolve.vercel.app",
+        "http://localhost:5174",
+        "http://localhost:5175",
+        "https://we-resolve.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
