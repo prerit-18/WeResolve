@@ -18,6 +18,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [activeTab, setActiveTab] = useState('Dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(typeof window !== 'undefined' ? window.innerWidth >= 1024 : true);
 
   // States for dashboard datasets
   const [stats, setStats] = useState(null);
@@ -329,20 +330,43 @@ export default function App() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-slate-50/50">
+    <div className="flex h-svh overflow-hidden bg-slate-50/50 relative">
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-20 bg-black/30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Left Sidebar */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={handleLogout} />
+      <div
+        className={`fixed inset-y-0 left-0 z-30 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 lg:z-auto ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <Sidebar
+          activeTab={activeTab}
+          setActiveTab={(tab) => { setActiveTab(tab); if (window.innerWidth < 1024) setSidebarOpen(false); }}
+          onLogout={handleLogout}
+        />
+      </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col h-screen overflow-y-auto">
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         {/* Header */}
-        <Header user={user} onLogout={handleLogout} onNotificationClick={() => setActiveTab('Activity Logs')} />
+        <Header
+          user={user}
+          onLogout={handleLogout}
+          onMenuClick={() => setSidebarOpen(o => !o)}
+          onNotificationClick={() => setActiveTab('Activity Logs')}
+        />
 
         {/* Stats Summary Row */}
         <StatsCards stats={stats} />
 
         {/* Dash Grid */}
-        <main className="px-8 pb-8">
+        <main className="px-4 sm:px-6 md:px-8 pb-8">
           <div className="mt-4">
             {renderContent()}
           </div>

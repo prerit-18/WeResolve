@@ -28,6 +28,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
   const [selectedCategory, setSelectedCategory] = useState('Any Category');
   const [selectedSort, setSelectedSort] = useState('Nearest');
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(typeof window !== 'undefined' ? window.innerWidth >= 1024 : true);
   const [selectedPriorities, setSelectedPriorities] = useState(['High', 'Medium', 'Low']);
 
   // Request location permission on mount
@@ -133,16 +134,16 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
     switch (activeTab) {
       case 'Dashboard':
         return (
-          <div className="grid grid-cols-3 gap-6 items-start">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 items-start">
             {/* Left Content Area */}
-            <div className="col-span-2 bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
+            <div className="col-span-1 xl:col-span-2 bg-white border border-slate-100 rounded-2xl p-4 sm:p-6 shadow-sm">
               <div className="mb-6">
                 <h2 className="text-[17px] font-bold text-slate-900 leading-tight">Available Issues</h2>
                 <p className="text-xs text-slate-500 font-semibold mt-1">Choose an issue nearby and start making a difference.</p>
               </div>
 
               {/* Filters Row */}
-              <div className="flex items-center gap-3.5 mb-6">
+              <div className="flex flex-wrap items-center gap-2 md:gap-3.5 mb-6">
                 <select 
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
@@ -242,11 +243,11 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
         );
       case 'Available Issues':
         return (
-          <div className="max-w-4xl mx-auto bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
+          <div className="max-w-4xl mx-auto bg-white border border-slate-100 rounded-2xl p-4 sm:p-6 shadow-sm">
             <h2 className="text-[17px] font-bold text-slate-900 mb-4">Available Issues Feed</h2>
             
             {/* Filters Row */}
-            <div className="flex items-center gap-3.5 mb-6">
+            <div className="flex flex-wrap items-center gap-2 md:gap-3.5 mb-6">
               <select 
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
@@ -407,17 +408,41 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-50/50">
+    <div className="flex h-svh overflow-hidden bg-slate-50/50 relative">
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-20 bg-black/30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={onLogout} />
+      <div
+        className={`fixed inset-y-0 left-0 z-30 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 lg:z-auto ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <Sidebar
+          activeTab={activeTab}
+          setActiveTab={(tab) => { setActiveTab(tab); if (window.innerWidth < 1024) setSidebarOpen(false); }}
+          onLogout={onLogout}
+        />
+      </div>
       
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         {/* Header */}
-        <Header user={user} location={location} onLogout={onLogout} onNotificationClick={() => setActiveTab('Notifications')} />
+        <Header
+          user={user}
+          location={location}
+          onLogout={onLogout}
+          onMenuClick={() => setSidebarOpen(o => !o)}
+          onNotificationClick={() => setActiveTab('Notifications')}
+        />
         
-        <main className="px-8 pb-8 space-y-6">
+        <main className="px-4 sm:px-6 md:px-8 pb-8 space-y-6">
           {/* Stats Section */}
-          <div className="flex items-center gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {stats.map((stat, idx) => (
               <StatCard key={idx} {...stat} />
             ))}
