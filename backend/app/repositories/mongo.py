@@ -260,6 +260,14 @@ class MongoRepository(BaseRepository):
         self.db.notifications.insert_one(notif_doc)
         return MongoNotification(notif_doc)
 
+    def mark_notification_read(self, notification_id: int, user_id: int) -> bool:
+        res = self.db.notifications.update_one({"id": notification_id, "user_id": user_id}, {"$set": {"read": True}})
+        return res.modified_count > 0
+
+    def mark_all_notifications_read(self, user_id: int) -> bool:
+        self.db.notifications.update_many({"user_id": user_id}, {"$set": {"read": True}})
+        return True
+
     def get_admin_stats(self) -> dict:
         total = self.db.issues.count_documents({})
         in_progress = self.db.issues.count_documents({"status": "In Progress"})
