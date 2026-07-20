@@ -419,7 +419,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-30 transition-transform duration-300 ease-in-out lg:static lg:z-auto ${
+        className={`fixed inset-y-0 left-0 z-30 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 lg:z-auto ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -442,7 +442,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
         
         <main className="px-4 sm:px-6 md:px-8 pb-8 space-y-6">
           {/* Stats Section */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {stats.map((stat, idx) => (
               <StatCard key={idx} {...stat} />
             ))}

@@ -37,7 +37,7 @@ export default function StatsCards({ stats }) {
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 px-4 sm:px-6 md:px-8 mb-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 px-4 sm:px-6 md:px-8 mb-6">
       {cards.map((card, idx) => (
         <div key={idx} className="bg-white p-4 md:p-5 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-3 md:gap-4 hover:shadow-md transition duration-200">
           {/* Icon container */}

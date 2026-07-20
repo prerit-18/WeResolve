@@ -13,7 +13,7 @@ export default function Header({ user, onNotificationClick, onMenuClick, onLogou
         <div className="flex items-center gap-3 min-w-0">
           <button
             onClick={onMenuClick}
-            className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 transition shrink-0"
+            className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 transition shrink-0 lg:hidden"
             aria-label="Toggle sidebar"
           >
             <Menu className="h-5 w-5" />

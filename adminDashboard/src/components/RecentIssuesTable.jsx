@@ -80,19 +80,19 @@ export default function RecentIssuesTable({ issues = [] }) {
   });
 
   return (
-    <div className="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
+    <div className="bg-white border border-slate-100 rounded-2xl p-4 sm:p-6 shadow-sm">
       {/* Header and Filter Row */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
         <div>
           <h3 className="text-[15px] font-bold text-slate-900 leading-none">Recent Issues</h3>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3">
           {/* Dropdown Filters */}
           <select 
             value={locationFilter}
             onChange={(e) => setLocationFilter(e.target.value)}
-            className="px-3 py-2 bg-white border border-slate-200/80 rounded-xl text-slate-600 text-xs font-bold outline-none cursor-pointer hover:border-slate-300"
+            className="px-3 py-2 bg-white border border-slate-200/80 rounded-xl text-slate-600 text-xs font-bold outline-none cursor-pointer hover:border-slate-300 w-full sm:w-auto"
           >
             <option value="All Locations">All Locations</option>
             <option value="Koramangala, Bengaluru">Koramangala</option>
@@ -102,7 +102,7 @@ export default function RecentIssuesTable({ issues = [] }) {
           <select 
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 bg-white border border-slate-200/80 rounded-xl text-slate-600 text-xs font-bold outline-none cursor-pointer hover:border-slate-300"
+            className="px-3 py-2 bg-white border border-slate-200/80 rounded-xl text-slate-600 text-xs font-bold outline-none cursor-pointer hover:border-slate-300 w-full sm:w-auto"
           >
             <option value="All Status">All Status</option>
             <option value="Pending">Pending</option>
@@ -114,7 +114,7 @@ export default function RecentIssuesTable({ issues = [] }) {
           <select 
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="px-3 py-2 bg-white border border-slate-200/80 rounded-xl text-slate-600 text-xs font-bold outline-none cursor-pointer hover:border-slate-300"
+            className="px-3 py-2 bg-white border border-slate-200/80 rounded-xl text-slate-600 text-xs font-bold outline-none cursor-pointer hover:border-slate-300 w-full sm:w-auto"
           >
             <option value="All Categories">All Categories</option>
             <option value="Road Damage">Road Damage</option>
@@ -126,14 +126,14 @@ export default function RecentIssuesTable({ issues = [] }) {
           </select>
 
           {/* Search Input */}
-          <div className="relative flex items-center">
+          <div className="relative flex items-center w-full sm:w-auto">
             <Search className="absolute left-3.5 w-3.5 h-3.5 text-slate-400" />
             <input
               type="text"
               placeholder="Search issue ID, location..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-9 pr-4 py-2 border border-slate-200/80 rounded-xl text-slate-600 text-xs font-semibold outline-none w-56 focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 placeholder-slate-400"
+              className="pl-9 pr-4 py-2 border border-slate-200/80 rounded-xl text-slate-600 text-xs font-semibold outline-none w-full sm:w-56 focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 placeholder-slate-400"
             />
           </div>
         </div>

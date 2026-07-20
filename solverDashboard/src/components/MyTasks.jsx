@@ -84,7 +84,7 @@ export default function MyTasks({ refreshTrigger, triggerRefresh, onViewAll }) {
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+    <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-100">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-[17px] font-bold text-slate-900">My Tasks</h3>
         <button 
@@ -96,7 +96,7 @@ export default function MyTasks({ refreshTrigger, triggerRefresh, onViewAll }) {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-4 border-b border-slate-100 mb-4">
+      <div className="flex gap-4 border-b border-slate-100 mb-4 overflow-x-auto no-scrollbar">
         <button
           onClick={() => setActiveTab('In Progress')}
           className={`px-2 py-2.5 border-b-2 text-sm font-bold flex items-center gap-1.5 transition-all duration-150 ${

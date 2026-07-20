@@ -44,10 +44,10 @@ export default function CategoryDistribution({ data = [] }) {
   });
 
   return (
-    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex-1">
-      <h3 className="text-[15px] font-bold text-slate-900 mb-6">Issues by Category</h3>
+    <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-100 shadow-sm flex-1">
+      <h3 className="text-[15px] font-bold text-slate-900 mb-4 sm:mb-6">Issues by Category</h3>
 
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
         {/* SVG Donut */}
         <div className="relative w-36 h-36 shrink-0">
           <svg viewBox="0 0 120 120" className="w-full h-full transform -rotate-90">

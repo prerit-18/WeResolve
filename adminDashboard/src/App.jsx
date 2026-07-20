@@ -180,9 +180,9 @@ export default function App() {
         );
       case 'Solvers':
         return (
-          <div className="max-w-4xl mx-auto bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Registered Solvers</h3>
-            <p className="text-xs text-slate-400 font-semibold mb-6">List of active solvers in the city database.</p>
+          <div className="max-w-4xl mx-auto bg-white p-4 sm:p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <h3 className="text-base font-bold text-slate-900 mb-2 sm:mb-4">Registered Solvers</h3>
+            <p className="text-xs text-slate-400 font-semibold mb-4 sm:mb-6">List of active solvers in the city database.</p>
             {dirLoading ? (
               <p className="text-xs text-slate-400 font-bold">Loading solvers...</p>
             ) : userDirectory.length === 0 ? (
@@ -190,15 +190,15 @@ export default function App() {
             ) : (
               <div className="space-y-3">
                 {userDirectory.map(usr => (
-                  <div key={usr.id} className="p-4 bg-slate-50 rounded-xl flex justify-between items-center text-xs">
+                  <div key={usr.id} className="p-3.5 sm:p-4 bg-slate-50 rounded-xl flex flex-col sm:flex-row justify-between sm:items-center gap-3 text-xs">
                     <div className="flex items-center gap-3">
-                      <img src={usr.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=Solver'} className="w-9 h-9 rounded-full object-cover" />
-                      <div>
-                        <p className="font-extrabold text-slate-950">{usr.full_name}</p>
-                        <p className="text-slate-400 mt-0.5">{usr.email}</p>
+                      <img src={usr.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=Solver'} className="w-9 h-9 rounded-full object-cover shrink-0" />
+                      <div className="min-w-0">
+                        <p className="font-extrabold text-slate-950 truncate">{usr.full_name}</p>
+                        <p className="text-slate-400 mt-0.5 truncate">{usr.email}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4 text-xs">
+                    <div className="flex items-center justify-between sm:justify-end gap-4 text-xs pt-2 sm:pt-0 border-t border-slate-200/50 sm:border-t-0">
                       <span className="text-green-600 font-black">{usr.credits} Credits</span>
                       <span className="px-2.5 py-1 bg-purple-50 text-purple-700 font-extrabold rounded-lg border border-purple-100">Level {usr.level}</span>
                     </div>
@@ -210,9 +210,9 @@ export default function App() {
         );
       case 'Citizens':
         return (
-          <div className="max-w-4xl mx-auto bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Registered Citizens</h3>
-            <p className="text-xs text-slate-400 font-semibold mb-6">List of citizens reporting local issues.</p>
+          <div className="max-w-4xl mx-auto bg-white p-4 sm:p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <h3 className="text-base font-bold text-slate-900 mb-2 sm:mb-4">Registered Citizens</h3>
+            <p className="text-xs text-slate-400 font-semibold mb-4 sm:mb-6">List of citizens reporting local issues.</p>
             {dirLoading ? (
               <p className="text-xs text-slate-400 font-bold">Loading citizens...</p>
             ) : userDirectory.length === 0 ? (
@@ -220,15 +220,15 @@ export default function App() {
             ) : (
               <div className="space-y-3">
                 {userDirectory.map(usr => (
-                  <div key={usr.id} className="p-4 bg-slate-50 rounded-xl flex justify-between items-center text-xs">
+                  <div key={usr.id} className="p-3.5 sm:p-4 bg-slate-50 rounded-xl flex flex-col sm:flex-row justify-between sm:items-center gap-3 text-xs">
                     <div className="flex items-center gap-3">
-                      <img src={usr.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=Citizen'} className="w-9 h-9 rounded-full object-cover" />
-                      <div>
-                        <p className="font-extrabold text-slate-950">{usr.full_name}</p>
-                        <p className="text-slate-400 mt-0.5">{usr.email}</p>
+                      <img src={usr.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=Citizen'} className="w-9 h-9 rounded-full object-cover shrink-0" />
+                      <div className="min-w-0">
+                        <p className="font-extrabold text-slate-950 truncate">{usr.full_name}</p>
+                        <p className="text-slate-400 mt-0.5 truncate">{usr.email}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4 text-xs">
+                    <div className="flex items-center justify-between sm:justify-end gap-4 text-xs pt-2 sm:pt-0 border-t border-slate-200/50 sm:border-t-0">
                       <span className="text-green-600 font-black">{usr.credits} Credits</span>
                       <span className="px-2.5 py-1 bg-blue-50 text-blue-700 font-extrabold rounded-lg border border-blue-100">Citizen</span>
                     </div>
@@ -339,7 +339,7 @@ export default function App() {
 
       {/* Left Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-30 transition-transform duration-300 ease-in-out lg:static lg:z-auto ${
+        className={`fixed inset-y-0 left-0 z-30 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 lg:z-auto ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

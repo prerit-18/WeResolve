@@ -153,7 +153,7 @@ export default function Login({ onLoginSuccess }) {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -z-10 pointer-events-none animate-pulse"></div>
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl -z-10 pointer-events-none animate-pulse duration-500"></div>
 
-      <div className="max-w-md w-full space-y-8 bg-[#111827]/80 backdrop-blur-xl p-8 border border-slate-800 rounded-3xl shadow-2xl relative overflow-hidden">
+      <div className="max-w-md w-full space-y-6 sm:space-y-8 bg-[#111827]/80 backdrop-blur-xl p-5 sm:p-8 border border-slate-800 rounded-3xl shadow-2xl relative overflow-hidden">
         {/* Subtle top role-specific gradient border glow */}
         <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent ${activeTab === 'citizen' ? 'via-indigo-500' : activeTab === 'solver' ? 'via-purple-500' : 'via-blue-500'} to-transparent`}></div>
         
@@ -179,7 +179,7 @@ export default function Login({ onLoginSuccess }) {
 
         {/* Tab Selection */}
         {isLogin && (
-          <div className="bg-[#1f2937]/60 p-1.5 rounded-2xl border border-slate-800/80 flex gap-1">
+          <div className="bg-[#1f2937]/60 p-1.5 rounded-2xl border border-slate-800/80 flex flex-wrap sm:flex-nowrap gap-1">
             <button
               type="button"
               onClick={() => { setActiveTab('citizen'); setError(''); }}
