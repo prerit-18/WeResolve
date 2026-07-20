@@ -84,3 +84,9 @@ export const adminApi = {
     return apiCall(`/admin/users${query}`);
   },
 };
+
+export const notificationsApi = {
+  list: () => apiCall('/notifications/'),
+  markRead: (id) => apiCall(`/notifications/${id}/read`, { method: 'POST' }),
+  markAllRead: () => apiCall('/notifications/read-all', { method: 'POST' }),
+};

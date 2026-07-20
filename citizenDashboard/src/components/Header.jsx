@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Menu, MapPin, ChevronDown, Bell, LogOut } from 'lucide-react'
 
-export default function Header({ user, location, onMenuClick, onNotificationClick, onLogout }) {
+export default function Header({ user, location, onMenuClick, onNotificationClick, onLogout, unreadCount = 0 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const name = user?.full_name || 'Citizen'
   const avatar = user?.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=Citizen'
@@ -46,9 +46,11 @@ export default function Header({ user, location, onMenuClick, onNotificationClic
           aria-label="Notifications"
         >
           <Bell className="h-[18px] w-[18px]" strokeWidth={2.1} />
-          <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-brand-500 text-[10px] font-semibold text-white ring-2 ring-white">
-            3
-          </span>
+          {unreadCount > 0 && (
+            <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-brand-500 text-[10px] font-semibold text-white ring-2 ring-white">
+              {unreadCount}
+            </span>
+          )}
         </button>
 
         <div className="relative">

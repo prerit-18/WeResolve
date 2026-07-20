@@ -5,7 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 
 from .database import engine, Base, DATABASE_TYPE
-from .routers import auth, issues, tasks, admin
+from .routers import auth, issues, tasks, admin, notifications
 
 # Create tables
 if DATABASE_TYPE != "mongodb":
@@ -40,6 +40,7 @@ app.include_router(auth.router, prefix="/api")
 app.include_router(issues.router, prefix="/api")
 app.include_router(tasks.router, prefix="/api")
 app.include_router(admin.router, prefix="/api")
+app.include_router(notifications.router, prefix="/api")
 
 @app.get("/", response_class=HTMLResponse)
 def home():

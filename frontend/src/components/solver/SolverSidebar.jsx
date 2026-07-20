@@ -9,17 +9,18 @@ import {
   HelpCircle,
   LogOut,
   HeartPulse,
-  Gift
+  Gift,
+  LayoutDashboard
 } from 'lucide-react';
 
-export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
+export default function Sidebar({ activeTab, setActiveTab, onLogout, unreadCount = 0 }) {
   const menuItems = [
-    { icon: Home, label: 'Dashboard' },
+    { icon: LayoutDashboard, label: 'Dashboard' },
     { icon: ClipboardList, label: 'Available Issues' },
     { icon: ShieldCheck, label: 'My Tasks' },
     { icon: Gift, label: 'Rewards & Credits' },
     { icon: Users, label: 'Leaderboard' },
-    { icon: Bell, label: 'Notifications', badge: '3' },
+    { icon: Bell, label: 'Notifications' },
     { icon: User, label: 'Profile' },
     { icon: HelpCircle, label: 'Help & Support' },
     { icon: LogOut, label: 'Logout' },
@@ -33,8 +34,8 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
           <HeartPulse className="h-6 w-6 text-white" strokeWidth={2.4} />
         </div>
         <div className="leading-tight">
-          <h1 className="text-xl font-bold text-gray-900 leading-none">WeResolve</h1>
-          <p className="text-[11px] text-gray-500 font-semibold tracking-wider mt-1">Solve. Earn. Impact.</p>
+          <h2 className="font-extrabold text-slate-900 text-base leading-tight">WeResolve</h2>
+          <p className="text-[10px] text-purple-600 font-bold uppercase tracking-wider">Solver Hub</p>
         </div>
       </div>
 
@@ -42,6 +43,7 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
       <nav className="flex-1 space-y-1 px-1 overflow-y-auto">
         {menuItems.map((item, idx) => {
           const isActive = activeTab === item.label;
+          const badgeCount = item.label === 'Notifications' ? unreadCount : 0;
           return (
             <div
               key={idx}
@@ -60,9 +62,9 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
             >
               <item.icon className={`w-5 h-5 ${isActive ? 'text-purple-600' : 'text-slate-400'}`} strokeWidth={2} />
               <span className="flex-1 text-sm">{item.label}</span>
-              {item.badge && (
+              {badgeCount > 0 && (
                 <span className="bg-purple-600 text-white text-[11px] font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                  {item.badge}
+                  {badgeCount}
                 </span>
               )}
             </div>

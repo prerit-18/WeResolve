@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Calendar, Bell, ChevronDown, LogOut, Menu } from 'lucide-react';
 
-export default function Header({ user, onNotificationClick, onMenuClick, onLogout }) {
+export default function Header({ user, onNotificationClick, onMenuClick, onLogout, unreadCount = 0 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const name = user?.full_name || 'Admin';
   const avatar = user?.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=100';
@@ -41,9 +41,11 @@ export default function Header({ user, onNotificationClick, onMenuClick, onLogou
             className="relative p-2.5 bg-white border border-slate-200/80 rounded-full shadow-sm cursor-pointer hover:bg-slate-50 transition duration-150"
           >
             <Bell className="w-5 h-5 text-slate-600 hover:text-slate-900" />
-            <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center border-2 border-white">
-              5
-            </span>
+            {unreadCount > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center border-2 border-white">
+                {unreadCount}
+              </span>
+            )}
           </div>
 
           {/* Profile Card */}

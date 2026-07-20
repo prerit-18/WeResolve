@@ -7,7 +7,7 @@ import IssueCard from './IssueCard';
 import MyTasks from './MyTasks';
 import TopSolvers from './TopSolvers';
 import { Gift, Award, Star, Shield, Filter, ChevronDown, Bell, User as UserIcon, HelpCircle } from 'lucide-react';
-import { issuesApi, tasksApi } from '../api';
+import { issuesApi, tasksApi, notificationsApi } from '../api';
 
 function getDistance(lat1, lon1, lat2, lon2) {
   const R = 6371; // Radius of the earth in km
@@ -24,6 +24,7 @@ function getDistance(lat1, lon1, lat2, lon2) {
 export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefresh, activeTab, setActiveTab }) {
   const [issues, setIssues] = useState([]);
   const [tasksCount, setTasksCount] = useState(0);
+  const [notifications, setNotifications] = useState([]);
   const [location, setLocation] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('Any Category');
   const [selectedSort, setSelectedSort] = useState('Nearest');
@@ -47,6 +48,34 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
       );
     }
   }, []);
+
+  const fetchNotifications = async () => {
+    try {
+      const list = await notificationsApi.list()
+      setNotifications(list)
+    } catch (err) {
+      console.error("Failed to fetch notifications:", err)
+    }
+  }
+
+  useEffect(() => {
+    if (user) {
+      fetchNotifications();
+      const interval = setInterval(fetchNotifications, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [user]);
+
+  const unreadCount = notifications.filter(n => !n.read).length;
+
+  const handleMarkAllRead = async () => {
+    try {
+      await notificationsApi.markAllRead();
+      setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+    } catch (err) {
+      console.error("Failed to mark all as read:", err);
+    }
+  };
 
   useEffect(() => {
     const getIssueLocationName = (lat, lon) => {
@@ -344,21 +373,58 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
         );
       case 'Notifications':
         return (
-          <div className="max-w-xl mx-auto bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <Bell className="w-5 h-5 text-purple-600" />
-              <span>Solver Alerts</span>
-            </h3>
-            <div className="space-y-3">
-              <div className="p-4 bg-slate-50 rounded-xl">
-                <p className="text-xs font-bold text-slate-800">Verification complete for issue UP-1220</p>
-                <p className="text-[10px] text-slate-500 mt-1">1 hour ago • You earned 30 credits and 50 XP!</p>
-              </div>
-              <div className="p-4 bg-slate-50 rounded-xl">
-                <p className="text-xs font-bold text-slate-800">Task accepted successfully</p>
-                <p className="text-[10px] text-slate-500 mt-1">2 hours ago • You are working on "Large pothole on 5th Main Road"</p>
-              </div>
+          <div className="max-w-2xl mx-auto bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <Bell className="w-5 h-5 text-purple-600" />
+                <span>Solver Notifications</span>
+                {unreadCount > 0 && (
+                  <span className="bg-purple-600 text-white text-xs px-2.5 py-0.5 rounded-full font-bold">
+                    {unreadCount} new
+                  </span>
+                )}
+              </h3>
+              {unreadCount > 0 && (
+                <button
+                  onClick={handleMarkAllRead}
+                  className="text-xs font-bold text-purple-600 hover:text-purple-700 bg-purple-50 px-3 py-1.5 rounded-xl transition"
+                >
+                  Mark all as read
+                </button>
+              )}
             </div>
+
+            {notifications.length === 0 ? (
+              <div className="text-center py-12 border border-dashed border-slate-200 rounded-2xl">
+                <Bell className="w-8 h-8 text-slate-300 mx-auto mb-2" />
+                <p className="text-sm font-bold text-slate-600">No notifications yet</p>
+                <p className="text-xs text-slate-400 mt-1">You will receive live alerts when tasks are accepted, submitted, or approved.</p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {notifications.map((n) => (
+                  <div
+                    key={n.id}
+                    className={`p-4 rounded-xl border transition-all ${
+                      n.read ? 'bg-slate-50/50 border-slate-100 text-slate-600' : 'bg-purple-50/40 border-purple-100/80 text-slate-900 font-semibold shadow-xs'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-xs font-bold text-slate-900">{n.title}</p>
+                        <p className="text-xs text-slate-600 mt-1 leading-relaxed">{n.message}</p>
+                        <p className="text-[10px] text-slate-400 mt-2 font-medium">
+                          {new Date(n.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                        </p>
+                      </div>
+                      {!n.read && (
+                        <span className="w-2.5 h-2.5 rounded-full bg-purple-600 shrink-0 mt-1" title="Unread" />
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         );
       case 'Profile':
@@ -427,6 +493,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
           activeTab={activeTab}
           setActiveTab={(tab) => { setActiveTab(tab); if (window.innerWidth < 1024) setSidebarOpen(false); }}
           onLogout={onLogout}
+          unreadCount={unreadCount}
         />
       </div>
       
@@ -438,6 +505,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
           onLogout={onLogout}
           onMenuClick={() => setSidebarOpen(o => !o)}
           onNotificationClick={() => setActiveTab('Notifications')}
+          unreadCount={unreadCount}
         />
         
         <main className="px-4 sm:px-6 md:px-8 pb-8 space-y-6">

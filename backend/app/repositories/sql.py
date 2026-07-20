@@ -180,6 +180,19 @@ class SQLAlchemyRepository(BaseRepository):
         self.db.refresh(notification)
         return notification
 
+    def mark_notification_read(self, notification_id: int, user_id: int) -> bool:
+        n = self.db.query(models.Notification).filter(models.Notification.id == notification_id, models.Notification.user_id == user_id).first()
+        if n:
+            n.read = True
+            self.db.commit()
+            return True
+        return False
+
+    def mark_all_notifications_read(self, user_id: int) -> bool:
+        self.db.query(models.Notification).filter(models.Notification.user_id == user_id).update({"read": True})
+        self.db.commit()
+        return True
+
     def get_admin_stats(self) -> dict:
         total = self.db.query(models.Issue).count()
         in_progress = self.db.query(models.Issue).filter(models.Issue.status == "In Progress").count()

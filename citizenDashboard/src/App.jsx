@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { authApi, issuesApi } from './api'
+import { authApi, issuesApi, notificationsApi } from './api'
 import Login from './components/Login'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
@@ -27,6 +27,7 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [reports, setReports] = useState([])
   const [nearby, setNearby] = useState([])
+  const [notifications, setNotifications] = useState([])
   const [activeTab, setActiveTab] = useState('Dashboard')
   const [location, setLocation] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(typeof window !== 'undefined' ? window.innerWidth >= 1024 : true)
@@ -75,6 +76,34 @@ function App() {
       handleLogout()
     }
   }
+
+  const fetchNotifications = async () => {
+    try {
+      const list = await notificationsApi.list()
+      setNotifications(list)
+    } catch (err) {
+      console.error("Failed to fetch notifications:", err)
+    }
+  }
+
+  useEffect(() => {
+    if (user) {
+      fetchNotifications();
+      const interval = setInterval(fetchNotifications, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [user]);
+
+  const unreadCount = notifications.filter(n => !n.read).length;
+
+  const handleMarkAllRead = async () => {
+    try {
+      await notificationsApi.markAllRead();
+      setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+    } catch (err) {
+      console.error("Failed to mark all as read:", err);
+    }
+  };
 
   // Update nearby list when location becomes available
   useEffect(() => {
@@ -179,21 +208,58 @@ function App() {
         )
       case 'Notifications':
         return (
-          <div className="max-w-2xl mx-auto bg-white p-6 rounded-2xl border border-slate-100 shadow-card">
-            <h2 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <Bell className="w-5 h-5 text-brand-500" />
-              <span>Notifications Feed</span>
-            </h2>
-            <div className="space-y-3">
-              <div className="p-4 bg-slate-50 border border-slate-100 rounded-xl">
-                <p className="text-xs font-bold text-slate-800">New high-priority issue verified</p>
-                <p className="text-[11px] text-slate-400 mt-1">10 mins ago • Municipal Team started work on pothole</p>
-              </div>
-              <div className="p-4 bg-slate-50 border border-slate-100 rounded-xl">
-                <p className="text-xs font-bold text-slate-800">Verification submitted for issue UP-1245</p>
-                <p className="text-[11px] text-slate-400 mt-1">45 mins ago • Solver uploaded resolution image</p>
-              </div>
+          <div className="max-w-3xl mx-auto bg-white p-6 rounded-2xl border border-slate-100 shadow-card">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <Bell className="w-5 h-5 text-brand-500" />
+                <span>Notifications Feed</span>
+                {unreadCount > 0 && (
+                  <span className="bg-brand-500 text-white text-xs px-2.5 py-0.5 rounded-full font-bold">
+                    {unreadCount} new
+                  </span>
+                )}
+              </h2>
+              {unreadCount > 0 && (
+                <button
+                  onClick={handleMarkAllRead}
+                  className="text-xs font-bold text-brand-600 hover:text-brand-700 bg-brand-50 px-3 py-1.5 rounded-xl transition"
+                >
+                  Mark all as read
+                </button>
+              )}
             </div>
+
+            {notifications.length === 0 ? (
+              <div className="text-center py-12 border border-dashed border-slate-200 rounded-2xl">
+                <Bell className="w-8 h-8 text-slate-300 mx-auto mb-2" />
+                <p className="text-sm font-bold text-slate-600">No notifications yet</p>
+                <p className="text-xs text-slate-400 mt-1">You will be notified live when there are updates on reported issues.</p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {notifications.map((n) => (
+                  <div
+                    key={n.id}
+                    className={`p-4 rounded-xl border transition-all ${
+                      n.read ? 'bg-slate-50/50 border-slate-100 text-slate-600' : 'bg-brand-50/40 border-brand-100/80 text-slate-900 font-semibold shadow-xs'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-xs font-bold text-slate-900">{n.title}</p>
+                        <p className="text-xs text-slate-600 mt-1 leading-relaxed">{n.message}</p>
+                        <p className="text-[10px] text-slate-400 mt-2 font-medium">
+                          {new Date(n.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                        </p>
+                      </div>
+                      {!n.read && (
+                        <span className="w-2.5 h-2.5 rounded-full bg-brand-500 shrink-0 mt-1" title="Unread" />
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )
       case 'Rewards & Credits':
@@ -299,6 +365,7 @@ function App() {
           activeTab={activeTab}
           setActiveTab={(tab) => { setActiveTab(tab); if (window.innerWidth < 1024) setSidebarOpen(false); }}
           onLogout={handleLogout}
+          unreadCount={unreadCount}
         />
       </div>
 
@@ -310,6 +377,7 @@ function App() {
             onLogout={handleLogout}
             onMenuClick={() => setSidebarOpen(o => !o)}
             onNotificationClick={() => setActiveTab('Notifications')}
+            unreadCount={unreadCount}
           />
           
           <div className="space-y-6">

@@ -25,7 +25,7 @@ const navItems = [
   { label: 'Logout', icon: LogOut },
 ]
 
-export default function Sidebar({ className = '', activeTab, setActiveTab, onLogout }) {
+export default function Sidebar({ className = '', activeTab, setActiveTab, onLogout, unreadCount = 0 }) {
   return (
     <aside
       className={`flex h-full w-64 shrink-0 flex-col bg-white border-r border-slate-100 ${className}`}
@@ -43,8 +43,9 @@ export default function Sidebar({ className = '', activeTab, setActiveTab, onLog
 
       {/* Nav */}
       <nav className="mt-2 flex-1 space-y-1 px-3">
-        {navItems.map(({ label, icon: Icon, badge }) => {
+        {navItems.map(({ label, icon: Icon }) => {
           const isActive = activeTab === label;
+          const badgeCount = label === 'Notifications' ? unreadCount : 0;
           return (
             <button
               key={label}
@@ -66,9 +67,9 @@ export default function Sidebar({ className = '', activeTab, setActiveTab, onLog
                 strokeWidth={2}
               />
               <span className="flex-1 text-left">{label}</span>
-              {badge ? (
+              {badgeCount > 0 ? (
                 <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-500 text-[11px] font-semibold text-white">
-                  {badge}
+                  {badgeCount}
                 </span>
               ) : null}
             </button>

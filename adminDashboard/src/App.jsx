@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { authApi, adminApi, issuesApi } from './api';
+import { authApi, adminApi, issuesApi, notificationsApi } from './api';
 import Login from './components/Login';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
@@ -26,6 +26,7 @@ export default function App() {
   const [priorities, setPriorities] = useState([]);
   const [issues, setIssues] = useState([]);
   const [alerts, setAlerts] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [verifications, setVerifications] = useState([]);
   
   // Users directory list
@@ -92,6 +93,19 @@ export default function App() {
       setLoading(false);
     }
   }, [refreshTrigger]);
+
+  useEffect(() => {
+    if (user) {
+      notificationsApi.list().then(setNotifications).catch(console.error);
+      const interval = setInterval(() => {
+        adminApi.getAlerts().then(setAlerts).catch(console.error);
+        notificationsApi.list().then(setNotifications).catch(console.error);
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [user]);
+
+  const unreadCount = notifications.filter(n => !n.read).length || alerts.length;
 
   // Handle Fetch Users Directory dynamically
   useEffect(() => {
@@ -347,6 +361,7 @@ export default function App() {
           activeTab={activeTab}
           setActiveTab={(tab) => { setActiveTab(tab); if (window.innerWidth < 1024) setSidebarOpen(false); }}
           onLogout={handleLogout}
+          unreadCount={unreadCount}
         />
       </div>
 
@@ -358,6 +373,7 @@ export default function App() {
           onLogout={handleLogout}
           onMenuClick={() => setSidebarOpen(o => !o)}
           onNotificationClick={() => setActiveTab('Activity Logs')}
+          unreadCount={unreadCount}
         />
 
         {/* Stats Summary Row */}

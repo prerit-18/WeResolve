@@ -96,6 +96,14 @@ class BaseRepository(ABC):
     def create_notification(self, user_id: int, title: str, message: str) -> Any:
         pass
 
+    @abstractmethod
+    def mark_notification_read(self, notification_id: int, user_id: int) -> bool:
+        pass
+
+    @abstractmethod
+    def mark_all_notifications_read(self, user_id: int) -> bool:
+        pass
+
     # Admin Stats
     @abstractmethod
     def get_admin_stats(self) -> dict:
