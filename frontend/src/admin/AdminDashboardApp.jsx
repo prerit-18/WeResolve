@@ -142,11 +142,11 @@ export default function App() {
     switch (activeTab) {
       case 'Dashboard':
         return (
-          <div className="grid grid-cols-3 gap-6 items-start">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 items-start">
             {/* Left 2/3 Area */}
-            <div className="col-span-2 space-y-6">
+            <div className="col-span-1 xl:col-span-2 space-y-6">
               {/* Charts Subgrid */}
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <IssuesOverTime data={issuesOverTime} />
                 <CategoryDistribution data={categories} />
               </div>

@@ -31,7 +31,7 @@ export default function PendingVerifications({ verifications = [], onVerifySucce
   const chartVerifications = verifications.length > 0 ? verifications : [];
 
   return (
-    <div className="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
+    <div className="bg-white border border-slate-100 rounded-2xl p-4 sm:p-6 shadow-sm">
       <div className="flex items-center justify-between mb-5">
         <h3 className="text-[15px] font-bold text-slate-900">Pending Verifications</h3>
         <span className="text-[10px] font-black uppercase text-blue-600 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-md">
