@@ -216,7 +216,7 @@ export default function App() {
                     </div>
                     <div className="flex items-center gap-4 text-xs">
                       <span className="text-green-600 font-black">{usr.credits} Credits</span>
-                      <span className="px-2.5 py-1 bg-purple-50 text-purple-700 font-extrabold rounded-lg border border-purple-100">Level {usr.level}</span>
+                      <span className="px-2.5 py-1 bg-section text-primary font-extrabold rounded-lg border border-purple-100">Level {usr.level}</span>
                     </div>
                   </div>
                 ))}
@@ -246,7 +246,7 @@ export default function App() {
                     </div>
                     <div className="flex items-center gap-4 text-xs">
                       <span className="text-green-600 font-black">{usr.credits} Credits</span>
-                      <span className="px-2.5 py-1 bg-blue-50 text-blue-700 font-extrabold rounded-lg border border-blue-100">Citizen</span>
+                      <span className="px-2.5 py-1 bg-secondary/10 text-secondary font-extrabold rounded-lg border border-secondary/20">Citizen</span>
                     </div>
                   </div>
                 ))}
@@ -270,13 +270,13 @@ export default function App() {
         return (
           <div className="max-w-2xl mx-auto bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
             <h3 className="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
-              <AlertOctagon className="w-5 h-5 text-blue-600" />
+              <AlertOctagon className="w-5 h-5 text-secondary" />
               <span>AI Civic Dispatch Analysis</span>
             </h3>
             <p className="text-xs text-slate-400 font-semibold mb-6">Automated hot-spot profiling and recommendations.</p>
             <div className="space-y-4 text-xs">
-              <div className="p-4 bg-blue-50/50 border border-blue-100 rounded-xl">
-                <h4 className="font-bold text-blue-900">Garbage Accumulation Clustering</h4>
+              <div className="p-4 bg-secondary/5 border border-secondary/20 rounded-xl">
+                <h4 className="font-bold text-heading">Garbage Accumulation Clustering</h4>
                 <p className="text-[11px] text-slate-500 mt-1 leading-normal">
                   Reports indicate a 24% surge in garbage issues in Koramangala 7th block. Highly recommend establishing a daily municipal vehicle route along 4th Main Road.
                 </p>

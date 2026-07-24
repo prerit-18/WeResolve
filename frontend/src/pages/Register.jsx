@@ -16,18 +16,18 @@ export default function Register() {
     citizen: {
       label: 'Citizen',
       emoji: '📣',
-      accentColor: 'indigo',
-      badgeBg: 'bg-indigo-600',
-      btnBg: 'bg-indigo-600 hover:bg-indigo-700 shadow-indigo-500/20',
-      borderFocus: 'focus:border-indigo-500 focus:ring-indigo-500/20'
+      accentColor: 'secondary',
+      badgeBg: 'bg-secondary',
+      btnBg: 'bg-secondary hover:bg-secondaryDark shadow-secondary/20',
+      borderFocus: 'focus:border-secondary focus:ring-secondary/20'
     },
     solver: {
       label: 'Solver',
       emoji: '🛠️',
-      accentColor: 'purple',
-      badgeBg: 'bg-purple-600',
-      btnBg: 'bg-purple-600 hover:bg-purple-700 shadow-purple-500/20',
-      borderFocus: 'focus:border-purple-500 focus:ring-purple-500/20'
+      accentColor: 'primary',
+      badgeBg: 'bg-primary',
+      btnBg: 'bg-primary hover:bg-primaryDark shadow-primary/20',
+      borderFocus: 'focus:border-primary focus:ring-primary/20'
     }
   };
 
@@ -71,7 +71,7 @@ export default function Register() {
       {/* Header */}
       <header className="max-w-7xl mx-auto w-full px-6 py-6 flex justify-between items-center z-10 border-b border-slate-900/60">
         <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition duration-300">
+          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-secondary to-primary flex items-center justify-center shadow-lg shadow-secondary/20 group-hover:scale-105 transition duration-300">
             <HeartPulse className="h-5 w-5 text-white" strokeWidth={2.4} />
           </div>
           <span className="text-base font-black tracking-tight text-white group-hover:text-slate-100 transition duration-300">WeResolve</span>
@@ -85,14 +85,14 @@ export default function Register() {
       <main className="max-w-md mx-auto w-full px-6 py-12 flex-1 flex flex-col justify-center z-10">
         <div className="bg-[#111827]/40 backdrop-blur-md border border-slate-800/80 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
           {/* Top Accent Line */}
-          <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-${currentStyle.accentColor}-500 to-transparent transition-all duration-500`}></div>
+          <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-${currentStyle.accentColor} to-transparent transition-all duration-500`}></div>
 
           {/* Title Header */}
           <div className="text-center mb-6">
             <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-slate-900 border border-slate-800/50">
               Identity Registration
             </span>
-            <div className={`mx-auto flex h-14 w-14 items-center justify-center rounded-2xl ${currentStyle.badgeBg} shadow-xl shadow-${currentStyle.accentColor}-500/10 mt-4 mb-4 transition-all duration-500 transform hover:scale-105`}>
+            <div className={`mx-auto flex h-14 w-14 items-center justify-center rounded-2xl ${currentStyle.badgeBg} shadow-xl shadow-${currentStyle.accentColor}/10 mt-4 mb-4 transition-all duration-500 transform hover:scale-105`}>
               <span className="text-2xl">{currentStyle.emoji}</span>
             </div>
             <h2 className="text-2xl font-black text-white tracking-tight leading-none">
@@ -110,7 +110,7 @@ export default function Register() {
               onClick={() => { setActiveTab('citizen'); setError(''); }}
               className={`flex-1 py-2.5 rounded-xl text-xs font-black tracking-wide transition-all duration-300 flex items-center justify-center gap-1.5 ${
                 activeTab === 'citizen'
-                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/15'
+                  ? 'bg-secondary text-white shadow-lg shadow-secondary/15'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-[#1f2937]/40'
               }`}
             >
@@ -121,7 +121,7 @@ export default function Register() {
               onClick={() => { setActiveTab('solver'); setError(''); }}
               className={`flex-1 py-2.5 rounded-xl text-xs font-black tracking-wide transition-all duration-300 flex items-center justify-center gap-1.5 ${
                 activeTab === 'solver'
-                  ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/15'
+                  ? 'bg-primary text-white shadow-lg shadow-primary/15'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-[#1f2937]/40'
               }`}
             >
@@ -201,7 +201,7 @@ export default function Register() {
 
           {/* Login Toggle */}
           <div className="text-center pt-4 border-t border-slate-800/80 mt-5">
-            <Link to="/login" className={`text-xs font-bold hover:underline text-${currentStyle.accentColor}-400`}>
+            <Link to="/login" className={`text-xs font-bold hover:underline text-${currentStyle.accentColor}`}>
               Already have an account? Sign In
             </Link>
           </div>

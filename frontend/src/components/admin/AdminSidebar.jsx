@@ -39,12 +39,12 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
     <div className="w-64 bg-[#0f172a] text-slate-400 p-5 flex flex-col shrink-0 h-full border-r border-slate-800">
       {/* Brand Logo */}
       <div className="flex items-center gap-3 px-2 mb-8">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 shadow-lg shadow-blue-500/20">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary shadow-lg shadow-secondary/20">
           <HeartPulse className="h-6 w-6 text-white" strokeWidth={2.4} />
         </div>
         <div className="leading-tight">
           <h1 className="text-lg font-black text-white leading-none">WeResolve</h1>
-          <p className="text-[10px] text-blue-400 font-bold uppercase tracking-wider mt-1">Admin Dashboard</p>
+          <p className="text-[10px] text-secondary font-bold uppercase tracking-wider mt-1">Admin Dashboard</p>
         </div>
       </div>
 
@@ -62,7 +62,7 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
                   onClick={() => setShowUsersDropdown(!showUsersDropdown)}
                   className={`flex items-center gap-3.5 px-4 py-2.5 rounded-xl cursor-pointer transition duration-150 ${
                     isUserActive
-                      ? 'bg-blue-600/10 text-blue-400 font-extrabold border border-blue-600/20'
+                      ? 'bg-secondary/10 text-secondary font-extrabold border border-secondary/20'
                       : 'hover:bg-slate-800/60 hover:text-slate-200'
                   }`}
                 >
@@ -78,7 +78,7 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
                       onClick={() => setActiveTab('Solvers')}
                       className={`flex items-center gap-2.5 px-4 py-2 rounded-lg cursor-pointer text-xs font-bold transition duration-150 ${
                         activeTab === 'Solvers'
-                          ? 'bg-blue-600 text-white shadow-sm'
+                          ? 'bg-secondary text-white shadow-sm'
                           : 'hover:bg-slate-800/40 text-slate-400 hover:text-slate-300'
                       }`}
                     >
@@ -89,7 +89,7 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
                       onClick={() => setActiveTab('Citizens')}
                       className={`flex items-center gap-2.5 px-4 py-2 rounded-lg cursor-pointer text-xs font-bold transition duration-150 ${
                         activeTab === 'Citizens'
-                          ? 'bg-blue-600 text-white shadow-sm'
+                          ? 'bg-secondary text-white shadow-sm'
                           : 'hover:bg-slate-800/40 text-slate-400 hover:text-slate-300'
                       }`}
                     >
@@ -110,7 +110,7 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
               }}
               className={`flex items-center gap-3.5 px-4 py-2.5 rounded-xl cursor-pointer transition duration-150 ${
                 isActive
-                  ? 'bg-blue-600 text-white font-extrabold shadow-md shadow-blue-600/10'
+                  ? 'bg-secondary text-white font-extrabold shadow-md shadow-secondary/10'
                   : 'hover:bg-slate-800/60 hover:text-slate-200'
               }`}
             >
@@ -127,12 +127,12 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
       {/* Footer Profile Box */}
       <div className="mt-auto pt-6 border-t border-slate-800 space-y-4">
         <div className="flex items-center gap-3 p-3 bg-slate-900 rounded-2xl border border-slate-800/80">
-          <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/25">
-            <Shield className="w-5 h-5 text-blue-400" />
+          <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center border border-secondary/25">
+            <Shield className="w-5 h-5 text-secondary" />
           </div>
           <div className="leading-tight min-w-0">
             <p className="text-xs font-bold text-white truncate">Administrator</p>
-            <p className="text-[10px] text-blue-400 font-bold mt-0.5">Super Admin</p>
+            <p className="text-[10px] text-secondary font-bold mt-0.5">Super Admin</p>
           </div>
         </div>
 

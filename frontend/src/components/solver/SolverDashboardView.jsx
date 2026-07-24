@@ -135,9 +135,9 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
 
   const stats = [
     { icon: Gift, label: 'Social Credits', value: String(user?.credits !== undefined ? user.credits : 0), change: creditsChange, color: 'bg-green-50', textColor: 'text-green-600' },
-    { icon: Award, label: 'Tasks Completed', value: String(tasksCount), change: tasksChange, color: 'bg-purple-50', textColor: 'text-purple-600' },
+    { icon: Award, label: 'Tasks Completed', value: String(tasksCount), change: tasksChange, color: 'bg-section', textColor: 'text-primary' },
     { icon: Star, label: 'Rating', value: ratingValue, change: ratingChange, color: 'bg-orange-50', textColor: 'text-orange-600' },
-    { icon: Shield, label: 'Badges Earned', value: badgesValue, change: badgesChange, color: 'bg-blue-50', textColor: 'text-blue-600' },
+    { icon: Shield, label: 'Badges Earned', value: badgesValue, change: badgesChange, color: 'bg-secondary/10', textColor: 'text-secondary' },
   ];
 
   const renderMainContent = () => {
@@ -199,7 +199,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
 
                 <button 
                   onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-                  className={`px-4 py-2 border rounded-xl text-xs font-bold flex items-center gap-1.5 transition ${showAdvancedFilters ? 'bg-purple-600 border-purple-600 text-white' : 'bg-purple-50/70 border-purple-100 hover:bg-purple-100/70 text-purple-600'}`}
+                  className={`px-4 py-2 border rounded-xl text-xs font-bold flex items-center gap-1.5 transition ${showAdvancedFilters ? 'bg-primary border-primary text-white' : 'bg-section/70 border-purple-100 hover:bg-purple-100/70 text-primary'}`}
                 >
                   <Filter className="w-3.5 h-3.5" strokeWidth={2.2} />
                   <span>Filters</span>
@@ -222,7 +222,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
                             setSelectedPriorities([...selectedPriorities, prio]);
                           }
                         }}
-                        className={`px-3 py-1.5 rounded-lg border transition ${isSelected ? 'bg-white border-slate-200 text-purple-600 shadow-sm' : 'bg-transparent border-transparent text-slate-400 hover:text-slate-600'}`}
+                        className={`px-3 py-1.5 rounded-lg border transition ${isSelected ? 'bg-white border-slate-200 text-primary shadow-sm' : 'bg-transparent border-transparent text-slate-400 hover:text-slate-600'}`}
                       >
                         {prio}
                       </button>
@@ -250,7 +250,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
 
               {/* Load More Button */}
               <div className="flex justify-center mt-6">
-                <button className="text-purple-600 hover:text-purple-700 text-xs font-bold flex items-center gap-1 bg-purple-50 hover:bg-purple-100/70 px-4 py-2.5 rounded-xl transition">
+                <button className="text-primary hover:text-primaryDark text-xs font-bold flex items-center gap-1 bg-section hover:bg-purple-100/70 px-4 py-2.5 rounded-xl transition">
                   <span>Load more issues</span>
                   <ChevronDown className="w-3.5 h-3.5" />
                 </button>
@@ -303,7 +303,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
 
               <button 
                 onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-                className={`px-4 py-2 border rounded-xl text-xs font-bold flex items-center gap-1.5 transition ${showAdvancedFilters ? 'bg-purple-600 border-purple-600 text-white' : 'bg-purple-50/70 border-purple-100 hover:bg-purple-100/70 text-purple-600'}`}
+                className={`px-4 py-2 border rounded-xl text-xs font-bold flex items-center gap-1.5 transition ${showAdvancedFilters ? 'bg-primary border-primary text-white' : 'bg-section/70 border-purple-100 hover:bg-purple-100/70 text-primary'}`}
               >
                 <Filter className="w-3.5 h-3.5" strokeWidth={2.2} />
                 <span>Filters</span>
@@ -326,7 +326,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
                           setSelectedPriorities([...selectedPriorities, prio]);
                         }
                       }}
-                      className={`px-3 py-1.5 rounded-lg border transition ${isSelected ? 'bg-white border-slate-200 text-purple-600 shadow-sm' : 'bg-transparent border-transparent text-slate-400 hover:text-slate-600'}`}
+                      className={`px-3 py-1.5 rounded-lg border transition ${isSelected ? 'bg-white border-slate-200 text-primary shadow-sm' : 'bg-transparent border-transparent text-slate-400 hover:text-slate-600'}`}
                     >
                       {prio}
                     </button>
@@ -376,10 +376,10 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
           <div className="max-w-2xl mx-auto bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <Bell className="w-5 h-5 text-purple-600" />
+                <Bell className="w-5 h-5 text-primary" />
                 <span>Solver Notifications</span>
                 {unreadCount > 0 && (
-                  <span className="bg-purple-600 text-white text-xs px-2.5 py-0.5 rounded-full font-bold">
+                  <span className="bg-primary text-white text-xs px-2.5 py-0.5 rounded-full font-bold">
                     {unreadCount} new
                   </span>
                 )}
@@ -387,7 +387,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
               {unreadCount > 0 && (
                 <button
                   onClick={handleMarkAllRead}
-                  className="text-xs font-bold text-purple-600 hover:text-purple-700 bg-purple-50 px-3 py-1.5 rounded-xl transition"
+                  className="text-xs font-bold text-primary hover:text-primaryDark bg-section px-3 py-1.5 rounded-xl transition"
                 >
                   Mark all as read
                 </button>
@@ -406,7 +406,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
                   <div
                     key={n.id}
                     className={`p-4 rounded-xl border transition-all ${
-                      n.read ? 'bg-slate-50/50 border-slate-100 text-slate-600' : 'bg-purple-50/40 border-purple-100/80 text-slate-900 font-semibold shadow-xs'
+                      n.read ? 'bg-slate-50/50 border-slate-100 text-slate-600' : 'bg-section/40 border-purple-100/80 text-slate-900 font-semibold shadow-xs'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-3">
@@ -418,7 +418,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
                         </p>
                       </div>
                       {!n.read && (
-                        <span className="w-2.5 h-2.5 rounded-full bg-purple-600 shrink-0 mt-1" title="Unread" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-primary shrink-0 mt-1" title="Unread" />
                       )}
                     </div>
                   </div>
@@ -436,7 +436,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
               className="w-20 h-20 rounded-full mx-auto object-cover border shadow-sm mb-3"
             />
             <h3 className="text-base font-bold text-slate-900">{user?.full_name}</h3>
-            <p className="text-xs text-purple-600 font-bold uppercase mt-0.5">LEVEL {user?.level || 2} SOLVER</p>
+            <p className="text-xs text-primary font-bold uppercase mt-0.5">LEVEL {user?.level || 2} SOLVER</p>
             <div className="mt-6 border-t border-slate-100 pt-4 text-left space-y-3">
               <div className="flex justify-between text-xs font-bold">
                 <span className="text-slate-400">Email:</span>
@@ -444,7 +444,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
               </div>
               <div className="flex justify-between text-xs font-bold">
                 <span className="text-slate-400">XP Progress:</span>
-                <span className="text-purple-600">{user?.xp} / {user?.level * 100} XP</span>
+                <span className="text-primary">{user?.xp} / {user?.level * 100} XP</span>
               </div>
             </div>
           </div>
@@ -453,7 +453,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
         return (
           <div className="max-w-xl mx-auto bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
             <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <HelpCircle className="w-5 h-5 text-purple-600" />
+              <HelpCircle className="w-5 h-5 text-primary" />
               <span>Solver FAQ</span>
             </h3>
             <div className="space-y-4">

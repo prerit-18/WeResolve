@@ -78,7 +78,7 @@ export default function MyTasks({ refreshTrigger, triggerRefresh, onViewAll }) {
 
   const getStatusBadge = (status) => {
     if (status === 'In Progress') return 'bg-amber-100/70 text-amber-700';
-    if (status === 'Completed') return 'bg-blue-100/70 text-blue-700';
+    if (status === 'Completed') return 'bg-blue-100/70 text-secondary';
     if (status === 'Approved') return 'bg-green-100/70 text-green-700';
     return 'bg-red-100/70 text-red-700'; // Rejected
   };
@@ -89,7 +89,7 @@ export default function MyTasks({ refreshTrigger, triggerRefresh, onViewAll }) {
         <h3 className="text-[17px] font-bold text-slate-900">My Tasks</h3>
         <button 
           onClick={onViewAll}
-          className="text-purple-600 text-xs font-bold hover:text-purple-700 transition"
+          className="text-primary text-xs font-bold hover:text-primaryDark transition"
         >
           View All
         </button>
@@ -101,12 +101,12 @@ export default function MyTasks({ refreshTrigger, triggerRefresh, onViewAll }) {
           onClick={() => setActiveTab('In Progress')}
           className={`px-2 py-2.5 border-b-2 text-sm font-bold flex items-center gap-1.5 transition-all duration-150 ${
             activeTab === 'In Progress'
-              ? 'border-purple-600 text-purple-600'
+              ? 'border-primary text-primary'
               : 'border-transparent text-slate-400 hover:text-slate-600'
           }`}
         >
           <span>In Progress</span>
-          <span className="bg-purple-600 text-white text-[10px] font-black rounded-full px-1.5 py-0.5">
+          <span className="bg-primary text-white text-[10px] font-black rounded-full px-1.5 py-0.5">
             {tasks.filter((t) => t.status === 'In Progress').length}
           </span>
         </button>
@@ -114,7 +114,7 @@ export default function MyTasks({ refreshTrigger, triggerRefresh, onViewAll }) {
           onClick={() => setActiveTab('Completed')}
           className={`px-2 py-2.5 border-b-2 text-sm font-bold transition-all duration-150 ${
             activeTab === 'Completed'
-              ? 'border-purple-600 text-purple-600'
+              ? 'border-primary text-primary'
               : 'border-transparent text-slate-400 hover:text-slate-600'
           }`}
         >
@@ -178,14 +178,14 @@ export default function MyTasks({ refreshTrigger, triggerRefresh, onViewAll }) {
                         type="file"
                         accept="image/*"
                         onChange={(e) => setUploadFile(e.target.files[0])}
-                        className="w-full text-[11px] text-slate-500 file:mr-3 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 cursor-pointer"
+                        className="w-full text-[11px] text-slate-500 file:mr-3 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-section file:text-primary hover:file:bg-teal-50 cursor-pointer"
                       />
                     </div>
 
                     <button
                       onClick={() => handleUploadProof(task.id)}
                       disabled={isUploading}
-                      className="w-full py-2 bg-purple-600 hover:bg-purple-700 disabled:opacity-60 text-white text-[11px] font-bold rounded-xl transition flex items-center justify-center gap-1 shadow-sm"
+                      className="w-full py-2 bg-primary hover:bg-primaryDark disabled:opacity-60 text-white text-[11px] font-bold rounded-xl transition flex items-center justify-center gap-1 shadow-sm"
                     >
                       {isUploading ? (
                         <>

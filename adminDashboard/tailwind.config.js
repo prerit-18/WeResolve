@@ -8,17 +8,28 @@ export default {
     extend: {
       colors: {
         brand: {
-          50: '#f2f1ff',
-          100: '#e6e4ff',
-          200: '#cdc9ff',
-          300: '#aca4ff',
-          400: '#8b7ffb',
-          500: '#6f5ef2', // primary purple
-          600: '#5c46e0',
-          700: '#4c37bd',
-          800: '#3e2f96',
-          900: '#332a78',
+          50: '#F0FDFD', // light teal tint
+          100: '#E2E8F0', // border (light gray/teal shade)
+          200: '#CBD5E1', // hover border
+          300: '#64748B', // muted
+          400: '#475569', // text
+          500: '#0F9D9A', // Primary brand (Deep Teal)
+          600: '#0C7C79', // Primary hover (Dark Teal)
+          700: '#2563EB', // Secondary brand (Royal Blue)
+          800: '#1D4ED8', // Secondary hover (Blue)
+          900: '#0F172A', // Heading
         },
+        primary: "#0F9D9A",
+        primaryDark: "#0C7C79",
+        secondary: "#2563EB",
+        secondaryDark: "#1D4ED8",
+        background: "#F8FAFC",
+        section: "#EFF6FF",
+        card: "#FFFFFF",
+        heading: "#0F172A",
+        text: "#475569",
+        muted: "#64748B",
+        border: "#E2E8F0",
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],

@@ -30,12 +30,12 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout, unreadCount
     <div className="w-64 bg-white border-r border-gray-100 p-5 flex flex-col shrink-0 h-full">
       {/* Logo */}
       <div className="flex items-center gap-2.5 px-2 mb-8">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-600 shadow-md">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-md">
           <HeartPulse className="h-6 w-6 text-white" strokeWidth={2.4} />
         </div>
         <div className="leading-tight">
           <h2 className="font-extrabold text-slate-900 text-base leading-tight">WeResolve</h2>
-          <p className="text-[10px] text-purple-600 font-bold uppercase tracking-wider">Solver Hub</p>
+          <p className="text-[10px] text-primary font-bold uppercase tracking-wider">Solver Hub</p>
         </div>
       </div>
 
@@ -56,14 +56,14 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout, unreadCount
               }}
               className={`flex items-center gap-3 px-4 py-2.5 rounded-xl cursor-pointer transition-colors ${
                 isActive
-                  ? 'bg-purple-50 text-purple-600 font-bold'
+                  ? 'bg-section text-primary font-bold'
                   : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
               }`}
             >
-              <item.icon className={`w-5 h-5 ${isActive ? 'text-purple-600' : 'text-slate-400'}`} strokeWidth={2} />
+              <item.icon className={`w-5 h-5 ${isActive ? 'text-primary' : 'text-slate-400'}`} strokeWidth={2} />
               <span className="flex-1 text-sm">{item.label}</span>
               {badgeCount > 0 && (
-                <span className="bg-purple-600 text-white text-[11px] font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="bg-primary text-white text-[11px] font-bold rounded-full w-5 h-5 flex items-center justify-center">
                   {badgeCount}
                 </span>
               )}

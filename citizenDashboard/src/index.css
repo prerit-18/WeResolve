@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply bg-slate-50 text-slate-900;
+  @apply bg-background text-text;
 }
 
 ::-webkit-scrollbar {
@@ -15,7 +15,7 @@ body {
   height: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #d8d5f8;
+  background-color: #CBD5E1;
   border-radius: 999px;
 }
 ::-webkit-scrollbar-track {

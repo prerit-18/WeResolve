@@ -1,7 +1,7 @@
 import { MapPin, Calendar, ChevronRight, ImageOff } from 'lucide-react'
 
 const statusStyles = {
-  'In Progress': 'bg-blue-50 text-blue-600 border border-blue-100',
+  'In Progress': 'bg-secondary/10 text-secondary border border-secondary/20',
   Resolved: 'bg-emerald-50 text-emerald-600 border border-emerald-100',
   Pending: 'bg-brand-50 text-brand-600 border border-brand-100',
   Completed: 'bg-amber-50 text-amber-600 border border-amber-100',

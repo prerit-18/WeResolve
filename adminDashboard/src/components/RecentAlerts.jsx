@@ -4,7 +4,7 @@ const alertIcons = {
   alert: { Icon: ShieldAlert, color: 'text-red-500 bg-red-50 border-red-100' },
   warning: { Icon: AlertCircle, color: 'text-amber-500 bg-amber-50 border-amber-100' },
   success: { Icon: CheckCircle, color: 'text-green-500 bg-green-50 border-green-100' },
-  info: { Icon: BellRing, color: 'text-blue-500 bg-blue-50 border-blue-100' },
+  info: { Icon: BellRing, color: 'text-blue-500 bg-secondary/10 border-secondary/20' },
   default: { Icon: Bell, color: 'text-slate-500 bg-slate-50 border-slate-100' },
 };
 
@@ -20,7 +20,7 @@ export default function RecentAlerts({ alerts = [] }) {
     <div className="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-[15px] font-bold text-slate-900">Recent Alerts</h3>
-        <span className="text-[10px] font-black uppercase text-blue-600 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-md">Live</span>
+        <span className="text-[10px] font-black uppercase text-secondary bg-secondary/10 border border-secondary/20 px-2 py-0.5 rounded-md">Live</span>
       </div>
 
       <div className="space-y-3.5">

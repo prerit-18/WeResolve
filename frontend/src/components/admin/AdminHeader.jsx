@@ -63,7 +63,7 @@ export default function Header({ user, onNotificationClick, onMenuClick, onLogou
               <div className="leading-tight hidden md:flex items-center gap-1">
                 <div>
                   <p className="font-bold text-slate-950 text-sm truncate max-w-[100px]">{name}</p>
-                  <p className="text-[10px] text-blue-600 font-black tracking-wide mt-0.5">Super Admin</p>
+                  <p className="text-[10px] text-secondary font-black tracking-wide mt-0.5">Super Admin</p>
                 </div>
                 <ChevronDown className="w-4 h-4 text-slate-400" />
               </div>

@@ -8,7 +8,7 @@ export default function StatsCards({ stats }) {
       trend: stats ? stats.total_issues_change.split(' ')[0] : '12.5%',
       isTrendUp: true,
       icon: FileText,
-      color: 'bg-blue-50 text-blue-600 border-blue-100',
+      color: 'bg-secondary/10 text-secondary border-secondary/20',
     },
     {
       label: 'In Progress',

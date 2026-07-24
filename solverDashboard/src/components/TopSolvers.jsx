@@ -44,7 +44,7 @@ export default function TopSolvers({ onViewAll }) {
               className="w-10 h-10 rounded-full object-cover border border-slate-100 shadow-sm"
             />
             <div className="flex-1 min-w-0">
-              <p className={`text-sm font-bold text-slate-900 truncate ${solver.name.includes('(You)') ? 'text-purple-700' : ''}`}>
+              <p className={`text-sm font-bold text-slate-900 truncate ${solver.name.includes('(You)') ? 'text-primary' : ''}`}>
                 {solver.name}
               </p>
               <p className="text-[12px] text-slate-500 font-medium mt-0.5">{solver.credits}</p>
@@ -56,7 +56,7 @@ export default function TopSolvers({ onViewAll }) {
 
       <button 
         onClick={onViewAll}
-        className="w-full mt-5 bg-purple-50 hover:bg-purple-100/80 text-purple-600 font-bold py-2.5 rounded-xl transition text-xs flex items-center justify-center gap-1"
+        className="w-full mt-5 bg-section hover:bg-purple-100/80 text-primary font-bold py-2.5 rounded-xl transition text-xs flex items-center justify-center gap-1"
       >
         <span>View Full Leaderboard</span>
         <ChevronRight className="w-3.5 h-3.5" />

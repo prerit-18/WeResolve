@@ -29,13 +29,13 @@ export default function ImpactWallet({ user }) {
 
   return (
     <div className="relative">
-      <div className="bg-gradient-to-br from-indigo-600 via-purple-600 to-purple-800 rounded-2xl p-6 text-white shadow-md flex items-stretch justify-between gap-4">
+      <div className="bg-gradient-to-br from-secondary via-secondaryDark to-primary rounded-2xl p-6 text-white shadow-md flex items-stretch justify-between gap-4">
         {/* Left Section */}
         <div className="flex flex-col justify-between flex-1">
           <div>
-            <h3 className="text-sm font-semibold flex items-center gap-1.5 text-purple-100 mb-4">
+            <h3 className="text-sm font-semibold flex items-center gap-1.5 text-white/90 mb-4">
               <span>Your Impact Wallet</span>
-              <HelpCircle className="w-4 h-4 text-purple-200/80 cursor-pointer" />
+              <HelpCircle className="w-4 h-4 text-white/70 cursor-pointer" />
             </h3>
 
             <div className="flex items-center gap-3">
@@ -45,7 +45,7 @@ export default function ImpactWallet({ user }) {
               </div>
               <div>
                 <p className="text-3xl font-black tracking-tight leading-none">{credits}</p>
-                <p className="text-xs text-purple-100 font-semibold mt-1">Social Credits</p>
+                <p className="text-xs text-white/80 font-semibold mt-1">Social Credits</p>
               </div>
             </div>
           </div>
@@ -64,14 +64,14 @@ export default function ImpactWallet({ user }) {
           <div className="relative w-12 h-12 flex items-center justify-center bg-gradient-to-br from-amber-400 to-amber-500 rounded-2xl shadow-md mb-2">
             <Star className="w-6 h-6 text-white fill-white" />
           </div>
-          <p className="text-xs text-purple-100 font-medium">Level {level}</p>
+          <p className="text-xs text-white/80 font-medium">Level {level}</p>
           <p className="text-[14px] font-extrabold text-white leading-tight">Solver</p>
 
           {/* Progress Bar */}
           <div className="w-full bg-white/20 h-1.5 rounded-full mt-3 overflow-hidden">
             <div className="bg-green-400 h-full rounded-full transition-all duration-300" style={{ width: `${xpPercentage}%` }}></div>
           </div>
-          <p className="text-[10px] text-purple-200/80 font-bold mt-1.5">{xp} / {maxXp} XP</p>
+          <p className="text-[10px] text-white/70 font-bold mt-1.5">{xp} / {maxXp} XP</p>
         </div>
       </div>
 
@@ -82,7 +82,7 @@ export default function ImpactWallet({ user }) {
             {/* Modal Header */}
             <div className="px-6 py-5 border-b border-slate-150 flex items-center justify-between bg-slate-50">
               <h3 className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-purple-600" />
+                <Sparkles className="w-4 h-4 text-primary" />
                 <span>Credit Transaction History</span>
               </h3>
               <button 

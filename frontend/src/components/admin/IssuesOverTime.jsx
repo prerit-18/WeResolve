@@ -60,7 +60,7 @@ export default function IssuesOverTime({ data = [] }) {
         <h3 className="text-[15px] font-bold text-slate-900">Issues Over Time</h3>
         <div className="flex items-center gap-4 text-xs font-bold">
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-secondary/100"></span>
             <span className="text-slate-500">Reported</span>
           </div>
           <div className="flex items-center gap-1.5">

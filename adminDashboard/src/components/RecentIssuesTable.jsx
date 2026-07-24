@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { Search, ChevronLeft, ChevronRight, MoreVertical, ImageOff } from 'lucide-react';
 
 const categoryStyles = {
-  'Road Damage': 'bg-blue-50 text-blue-700 border-blue-100',
+  'Road Damage': 'bg-secondary/10 text-secondary border-secondary/20',
   'Garbage': 'bg-green-50 text-green-700 border-green-100',
-  'Street Light': 'bg-purple-50 text-purple-700 border-purple-100',
+  'Street Light': 'bg-section text-primary border-purple-100',
   'Water Supply': 'bg-teal-50 text-teal-700 border-teal-100',
-  'Drainage': 'bg-indigo-50 text-indigo-700 border-indigo-100',
+  'Drainage': 'bg-secondary/10 text-secondary border-secondary/20',
   'Others': 'bg-slate-50 text-slate-700 border-slate-200',
 };
 
@@ -17,10 +17,10 @@ const priorityStyles = {
 };
 
 const statusStyles = {
-  'In Progress': 'bg-blue-50 text-blue-700 border-blue-100',
+  'In Progress': 'bg-secondary/10 text-secondary border-secondary/20',
   'Resolved': 'bg-emerald-50 text-emerald-700 border-emerald-100',
   'Pending': 'bg-amber-50 text-amber-700 border-amber-100',
-  'Completed': 'bg-purple-50 text-purple-700 border-purple-100',
+  'Completed': 'bg-section text-primary border-purple-100',
 };
 
 export default function RecentIssuesTable({ issues = [] }) {
@@ -133,7 +133,7 @@ export default function RecentIssuesTable({ issues = [] }) {
               placeholder="Search issue ID, location..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-9 pr-4 py-2 border border-slate-200/80 rounded-xl text-slate-600 text-xs font-semibold outline-none w-full sm:w-56 focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 placeholder-slate-400"
+              className="pl-9 pr-4 py-2 border border-slate-200/80 rounded-xl text-slate-600 text-xs font-semibold outline-none w-full sm:w-56 focus:border-secondary focus:ring-1 focus:ring-secondary/20 placeholder-slate-400"
             />
           </div>
         </div>
@@ -240,7 +240,7 @@ export default function RecentIssuesTable({ issues = [] }) {
             <ChevronLeft className="w-3.5 h-3.5 text-slate-400" />
           </button>
           
-          <button className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-extrabold shadow-sm">
+          <button className="w-8 h-8 rounded-lg bg-secondary text-white flex items-center justify-center font-extrabold shadow-sm">
             1
           </button>
           

@@ -1,9 +1,9 @@
 export default function CategoryDistribution({ data = [] }) {
   const getColorForLabel = (label) => {
-    if (label.includes('Road')) return 'bg-blue-500';
+    if (label.includes('Road')) return 'bg-secondary/100';
     if (label.includes('Garbage')) return 'bg-green-500';
     if (label.includes('Water')) return 'bg-amber-500';
-    if (label.includes('Light')) return 'bg-indigo-500';
+    if (label.includes('Light')) return 'bg-secondary/100';
     return 'bg-slate-400';
   };
 

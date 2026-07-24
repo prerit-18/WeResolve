@@ -34,7 +34,7 @@ export default function PendingVerifications({ verifications = [], onVerifySucce
     <div className="bg-white border border-slate-100 rounded-2xl p-4 sm:p-6 shadow-sm">
       <div className="flex items-center justify-between mb-5">
         <h3 className="text-[15px] font-bold text-slate-900">Pending Verifications</h3>
-        <span className="text-[10px] font-black uppercase text-blue-600 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-md">
+        <span className="text-[10px] font-black uppercase text-secondary bg-secondary/10 border border-secondary/20 px-2 py-0.5 rounded-md">
           {chartVerifications.length} Request{chartVerifications.length !== 1 ? 's' : ''}
         </span>
       </div>
@@ -120,7 +120,7 @@ export default function PendingVerifications({ verifications = [], onVerifySucce
 
       <button 
         onClick={onViewAll}
-        className="w-full mt-6 bg-blue-50 hover:bg-blue-100 text-blue-600 font-bold py-3 rounded-xl transition text-xs flex items-center justify-center gap-1.5"
+        className="w-full mt-6 bg-secondary/10 hover:bg-blue-100 text-secondary font-bold py-3 rounded-xl transition text-xs flex items-center justify-center gap-1.5"
       >
         <span>View All Verifications</span>
         <ArrowRight className="w-3.5 h-3.5" />
