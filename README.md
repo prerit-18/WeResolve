@@ -1,5 +1,7 @@
 # WeResolve
 
+## CURRENTLY BUILDING
+
 ## About
 
 WeResolve is an AI-powered civic issue reporting platform that helps citizens report local community problems such as potholes, garbage, broken streetlights, water leakage, and more.
