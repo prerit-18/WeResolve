@@ -344,7 +344,10 @@ function App() {
   }
 
   return (
-    <div className="flex min-h-screen bg-slate-50 relative">
+    <div 
+      className="flex min-h-screen bg-background bg-cover bg-center bg-no-repeat relative"
+      style={{ backgroundImage: "url('/dashboard-bg.png')" }}
+    >
       {/* Sidebar overlay for mobile */}
       {sidebarOpen && (
         <div

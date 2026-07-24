@@ -474,7 +474,10 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
   };
 
   return (
-    <div className="flex h-svh overflow-hidden bg-slate-50/50 relative">
+    <div 
+      className="flex h-svh overflow-hidden bg-background bg-cover bg-center bg-no-repeat relative"
+      style={{ backgroundImage: "url('/dashboard-bg.png')" }}
+    >
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div

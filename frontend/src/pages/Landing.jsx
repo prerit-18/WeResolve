@@ -3,10 +3,10 @@ import { HeartPulse, ArrowRight, Shield, Award, Users, MapPin, Sparkles } from '
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-background flex flex-col justify-between font-sans relative overflow-hidden text-text">
-      {/* Background Decorative Rings */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div 
+      className="min-h-screen bg-background bg-cover bg-center bg-no-repeat flex flex-col justify-between font-sans relative overflow-hidden text-text"
+      style={{ backgroundImage: "url('/homepage-bg.png')" }}
+    >
 
       {/* Header */}
       <header className="max-w-7xl mx-auto w-full px-6 py-6 flex justify-between items-center z-10">

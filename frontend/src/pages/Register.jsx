@@ -64,54 +64,54 @@ export default function Register() {
 
   return (
     <div 
-      className="min-h-screen bg-[#0b0f19] bg-cover bg-center bg-no-repeat flex flex-col justify-between font-sans relative overflow-hidden text-slate-300"
-      style={{ backgroundImage: "url('/login-bg.jpg')" }}
+      className="min-h-screen bg-background bg-cover bg-center bg-no-repeat flex flex-col justify-between font-sans relative overflow-hidden text-text"
+      style={{ backgroundImage: "url('/homepage-bg.png')" }}
     >
 
       {/* Header */}
-      <header className="max-w-7xl mx-auto w-full px-6 py-6 flex justify-between items-center z-10 border-b border-slate-900/60">
+      <header className="max-w-7xl mx-auto w-full px-6 py-6 flex justify-between items-center z-10 border-b border-slate-100/60">
         <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-secondary to-primary flex items-center justify-center shadow-lg shadow-secondary/20 group-hover:scale-105 transition duration-300">
+          <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition duration-300">
             <HeartPulse className="h-5 w-5 text-white" strokeWidth={2.4} />
           </div>
-          <span className="text-base font-black tracking-tight text-white group-hover:text-slate-100 transition duration-300">WeResolve</span>
+          <span className="text-base font-black tracking-tight text-heading group-hover:text-primary transition duration-300">WeResolve</span>
         </Link>
-        <div className="text-[10px] text-slate-500 font-black tracking-wider uppercase bg-slate-900/80 px-2 py-0.5 rounded border border-slate-800">
+        <div className="text-[10px] text-slate-500 font-black tracking-wider uppercase bg-white/80 px-2 py-0.5 rounded border border-slate-100">
           Gateway STATUS: <span className="text-green-500">ONLINE</span>
         </div>
       </header>
 
       {/* Main Form Container */}
       <main className="max-w-md mx-auto w-full px-6 py-12 flex-1 flex flex-col justify-center z-10">
-        <div className="bg-[#111827]/40 backdrop-blur-md border border-slate-800/80 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+        <div className="bg-white/80 backdrop-blur-md border border-slate-100 rounded-3xl p-8 shadow-2xl relative overflow-hidden text-text">
           {/* Top Accent Line */}
           <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-${currentStyle.accentColor} to-transparent transition-all duration-500`}></div>
 
           {/* Title Header */}
           <div className="text-center mb-6">
-            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-slate-900 border border-slate-800/50">
+            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-slate-100 border border-slate-200/50">
               Identity Registration
             </span>
             <div className={`mx-auto flex h-14 w-14 items-center justify-center rounded-2xl ${currentStyle.badgeBg} shadow-xl shadow-${currentStyle.accentColor}/10 mt-4 mb-4 transition-all duration-500 transform hover:scale-105`}>
               <span className="text-2xl">{currentStyle.emoji}</span>
             </div>
-            <h2 className="text-2xl font-black text-white tracking-tight leading-none">
+            <h2 className="text-2xl font-black text-heading tracking-tight leading-none">
               Create Account
             </h2>
-            <p className="mt-2 text-xs text-slate-400 font-semibold leading-relaxed">
+            <p className="mt-2 text-xs text-slate-500 font-semibold leading-relaxed">
               Create a new civic identity
             </p>
           </div>
 
           {/* Role Tab Selection */}
-          <div className="bg-[#1f2937]/60 p-1.5 rounded-2xl border border-slate-800/80 flex gap-1 mb-6">
+          <div className="bg-slate-50 p-1.5 rounded-2xl border border-slate-100 flex gap-1 mb-6">
             <button
               type="button"
               onClick={() => { setActiveTab('citizen'); setError(''); }}
               className={`flex-1 py-2.5 rounded-xl text-xs font-black tracking-wide transition-all duration-300 flex items-center justify-center gap-1.5 ${
                 activeTab === 'citizen'
                   ? 'bg-secondary text-white shadow-lg shadow-secondary/15'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-[#1f2937]/40'
+                  : 'text-slate-500 hover:text-heading hover:bg-slate-100/40'
               }`}
             >
               📣 Citizen
@@ -122,7 +122,7 @@ export default function Register() {
               className={`flex-1 py-2.5 rounded-xl text-xs font-black tracking-wide transition-all duration-300 flex items-center justify-center gap-1.5 ${
                 activeTab === 'solver'
                   ? 'bg-primary text-white shadow-lg shadow-primary/15'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-[#1f2937]/40'
+                  : 'text-slate-500 hover:text-heading hover:bg-slate-100/40'
               }`}
             >
               🛠️ Solver
@@ -131,7 +131,7 @@ export default function Register() {
 
           {/* Error Banner */}
           {error && (
-            <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 flex gap-3 text-xs text-red-400 font-bold mb-6 animate-headShake">
+            <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 flex gap-3 text-xs text-red-600 font-bold mb-6 animate-headShake">
               <ShieldAlert className="w-5 h-5 shrink-0 text-red-500" />
               <span>{error}</span>
             </div>
@@ -140,7 +140,7 @@ export default function Register() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-1.5">
                 Full Name
               </label>
               <div className="relative flex items-center">
@@ -151,13 +151,13 @@ export default function Register() {
                   placeholder="e.g. Amit Patel"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className={`w-full pl-10 pr-4 py-3 bg-[#1f2937]/60 border border-slate-800 rounded-xl text-sm font-semibold text-white outline-none transition-all duration-300 focus:outline-none ${currentStyle.borderFocus}`}
+                  className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 focus:border-primary focus:ring-primary/20 rounded-xl text-sm font-semibold text-slate-800 outline-none transition-all duration-300 focus:outline-none"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-1.5">
                 Email Address
               </label>
               <div className="relative flex items-center">
@@ -168,13 +168,13 @@ export default function Register() {
                   placeholder={`e.g. user@weresolve.org`}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`w-full pl-10 pr-4 py-3 bg-[#1f2937]/60 border border-slate-800 rounded-xl text-sm font-semibold text-white outline-none transition-all duration-300 focus:outline-none ${currentStyle.borderFocus}`}
+                  className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 focus:border-primary focus:ring-primary/20 rounded-xl text-sm font-semibold text-slate-800 outline-none transition-all duration-300 focus:outline-none"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-1.5">
                 Password
               </label>
               <div className="relative flex items-center">
@@ -185,7 +185,7 @@ export default function Register() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className={`w-full pl-10 pr-4 py-3 bg-[#1f2937]/60 border border-slate-800 rounded-xl text-sm font-semibold text-white outline-none transition-all duration-300 focus:outline-none ${currentStyle.borderFocus}`}
+                  className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 focus:border-primary focus:ring-primary/20 rounded-xl text-sm font-semibold text-slate-800 outline-none transition-all duration-300 focus:outline-none"
                 />
               </div>
             </div>
@@ -200,7 +200,7 @@ export default function Register() {
           </form>
 
           {/* Login Toggle */}
-          <div className="text-center pt-4 border-t border-slate-800/80 mt-5">
+          <div className="text-center pt-4 border-t border-slate-100 mt-5">
             <Link to="/login" className={`text-xs font-bold hover:underline text-${currentStyle.accentColor}`}>
               Already have an account? Sign In
             </Link>
@@ -209,7 +209,7 @@ export default function Register() {
       </main>
 
       {/* Footer */}
-      <footer className="max-w-7xl mx-auto w-full px-6 py-6 text-center border-t border-slate-900 mt-12 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+      <footer className="max-w-7xl mx-auto w-full px-6 py-6 text-center border-t border-slate-100 mt-12 text-[10px] text-muted font-bold uppercase tracking-wider">
         &copy; 2026 WeResolve Civic Solutions. All rights reserved.
       </footer>
     </div>

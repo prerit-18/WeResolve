@@ -148,19 +148,18 @@ export default function Login({ onLoginSuccess }) {
   const currentStyle = tabStyles[activeTab];
 
   return (
-    <div className="min-h-screen bg-[#0b0f19] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-500 font-sans">
-      {/* Decorative gradient blur */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl -z-10 pointer-events-none animate-pulse"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-section rounded-full blur-3xl -z-10 pointer-events-none animate-pulse duration-500"></div>
-
-      <div className="max-w-md w-full space-y-6 sm:space-y-8 bg-[#111827]/80 backdrop-blur-xl p-5 sm:p-8 border border-slate-800 rounded-3xl shadow-2xl relative overflow-hidden">
+    <div 
+      className="min-h-screen bg-background bg-cover bg-center bg-no-repeat flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-500 font-sans"
+      style={{ backgroundImage: "url('/homepage-bg.png')" }}
+    >
+      <div className="max-w-md w-full space-y-6 sm:space-y-8 bg-white/80 backdrop-blur-xl p-5 sm:p-8 border border-slate-100 rounded-3xl shadow-2xl relative overflow-hidden text-text">
         {/* Subtle top role-specific gradient border glow */}
         <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent ${activeTab === 'citizen' ? 'via-secondary' : activeTab === 'solver' ? 'via-primary' : 'via-secondary'} to-transparent`}></div>
         
         {/* Brand Header */}
         <div className="text-center relative">
           <div className="flex justify-center gap-3 mb-2">
-            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800/80 border border-slate-700/50">
+            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-100 border border-slate-200/50">
               Civic Portal
             </span>
           </div>
@@ -169,24 +168,24 @@ export default function Login({ onLoginSuccess }) {
             <HeartPulse className="h-8 w-8 text-white animate-pulse" strokeWidth={2.4} />
           </div>
           
-          <h2 className="text-3xl font-black text-white tracking-tight leading-none">
+          <h2 className="text-3xl font-black text-heading tracking-tight leading-none">
             WeResolve
           </h2>
-          <p className="mt-2 text-xs text-slate-400 font-semibold leading-relaxed">
+          <p className="mt-2 text-xs text-slate-500 font-semibold leading-relaxed">
             {isLogin ? 'Single sign-on access to municipal systems' : 'Create a new civic identity'}
           </p>
         </div>
 
         {/* Tab Selection */}
         {isLogin && (
-          <div className="bg-[#1f2937]/60 p-1.5 rounded-2xl border border-slate-800/80 flex flex-wrap sm:flex-nowrap gap-1">
+          <div className="bg-slate-50 p-1.5 rounded-2xl border border-slate-100 flex flex-wrap sm:flex-nowrap gap-1">
             <button
               type="button"
               onClick={() => { setActiveTab('citizen'); setError(''); }}
               className={`flex-1 py-2.5 rounded-xl text-xs font-black tracking-wide transition-all duration-300 flex items-center justify-center gap-1.5 ${
                 activeTab === 'citizen'
                   ? 'bg-secondary text-white shadow-lg shadow-secondary/15'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-[#1f2937]/40'
+                  : 'text-slate-500 hover:text-heading hover:bg-slate-100/40'
               }`}
             >
               📣 Citizen
@@ -197,7 +196,7 @@ export default function Login({ onLoginSuccess }) {
               className={`flex-1 py-2.5 rounded-xl text-xs font-black tracking-wide transition-all duration-300 flex items-center justify-center gap-1.5 ${
                 activeTab === 'solver'
                   ? 'bg-primary text-white shadow-lg shadow-primary/15'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-[#1f2937]/40'
+                  : 'text-slate-500 hover:text-heading hover:bg-slate-100/40'
               }`}
             >
               🛠️ Solver
@@ -208,7 +207,7 @@ export default function Login({ onLoginSuccess }) {
               className={`flex-1 py-2.5 rounded-xl text-xs font-black tracking-wide transition-all duration-300 flex items-center justify-center gap-1.5 ${
                 activeTab === 'admin'
                   ? 'bg-secondary text-white shadow-lg shadow-secondary/15'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-[#1f2937]/40'
+                  : 'text-slate-500 hover:text-heading hover:bg-slate-100/40'
               }`}
             >
               🏛️ Admin
@@ -217,7 +216,7 @@ export default function Login({ onLoginSuccess }) {
         )}
 
         {error && (
-          <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 flex gap-3 text-xs text-red-400 font-bold animate-headShake">
+          <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 flex gap-3 text-xs text-red-600 font-bold animate-headShake">
             <ShieldAlert className="w-5 h-5 shrink-0 text-red-500" />
             <span>{error}</span>
           </div>
@@ -226,7 +225,7 @@ export default function Login({ onLoginSuccess }) {
         <form className="space-y-5" onSubmit={handleSubmit}>
           {!isLogin && (
             <div>
-              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">
+              <label className="block text-[10px] font-black text-slate-505 uppercase tracking-wider mb-1.5">
                 Full Name
               </label>
               <div className="relative flex items-center">
@@ -237,14 +236,14 @@ export default function Login({ onLoginSuccess }) {
                   placeholder="Arjun Kumar"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className={`w-full pl-10 pr-4 py-3 bg-[#1f2937]/60 border border-slate-800 rounded-xl text-sm font-semibold text-white outline-none transition-all duration-300 ${currentStyle.borderFocus}`}
+                  className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 focus:border-primary focus:ring-primary/20 rounded-xl text-sm font-semibold text-slate-800 outline-none transition-all duration-300 focus:outline-none"
                 />
               </div>
             </div>
           )}
 
           <div>
-            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">
+            <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-1.5">
               Email Address
             </label>
             <div className="relative flex items-center">
@@ -255,13 +254,13 @@ export default function Login({ onLoginSuccess }) {
                 placeholder={seedInfo[activeTab].email}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className={`w-full pl-10 pr-4 py-3 bg-[#1f2937]/60 border border-slate-800 rounded-xl text-sm font-semibold text-white outline-none transition-all duration-300 ${currentStyle.borderFocus}`}
+                className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 focus:border-primary focus:ring-primary/20 rounded-xl text-sm font-semibold text-slate-800 outline-none transition-all duration-300 focus:outline-none"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">
+            <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-1.5">
               Secret Password
             </label>
             <div className="relative flex items-center">
@@ -272,32 +271,32 @@ export default function Login({ onLoginSuccess }) {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className={`w-full pl-10 pr-4 py-3 bg-[#1f2937]/60 border border-slate-800 rounded-xl text-sm font-semibold text-white outline-none transition-all duration-300 ${currentStyle.borderFocus}`}
+                className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 focus:border-primary focus:ring-primary/20 rounded-xl text-sm font-semibold text-slate-800 outline-none transition-all duration-300 focus:outline-none"
               />
             </div>
           </div>
 
           {!isLogin && (
             <div>
-              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-1.5">
                 Register As
               </label>
               <select
                 value={activeTab}
                 onChange={(e) => setActiveTab(e.target.value)}
-                className={`w-full px-4 py-3 bg-[#1f2937]/60 border border-slate-800 rounded-xl text-sm font-bold text-white outline-none transition-all duration-300 focus:border-${activeTab}-600`}
+                className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-800 outline-none transition-all duration-300 focus:border-primary focus:ring-primary/20"
               >
-                <option value="citizen" className="bg-[#111827] text-white">Citizen (Report problems)</option>
-                <option value="solver" className="bg-[#111827] text-white">Solver (Earn credits by fixing issues)</option>
+                <option value="citizen" className="bg-white text-slate-800">Citizen (Report problems)</option>
+                <option value="solver" className="bg-white text-slate-800">Solver (Earn credits by fixing issues)</option>
               </select>
             </div>
           )}
 
           {/* Quick Seeds */}
           {isLogin && (
-            <div className="bg-[#1f2937]/30 border border-slate-800/80 rounded-2xl p-4 text-[11px] text-slate-400 leading-normal">
+            <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 text-[11px] text-slate-500 leading-normal">
               <div className="flex justify-between items-center mb-1">
-                <span className="font-bold text-slate-300">💡 Quick Seed Autocomplete:</span>
+                <span className="font-bold text-heading">💡 Quick Seed Autocomplete:</span>
               </div>
               <p className="mt-1 flex flex-wrap gap-1.5 items-center">
                 Fill as:{' '}
@@ -345,7 +344,7 @@ export default function Login({ onLoginSuccess }) {
 
         {/* Signup Toggle */}
         {activeTab !== 'admin' && (
-          <div className="text-center pt-4 border-t border-slate-800/80">
+          <div className="text-center pt-4 border-t border-slate-100">
             <button
               onClick={() => {
                 setIsLogin(!isLogin);
