@@ -1,6 +1,6 @@
 # WeResolve
 
-## CURRENTLY BUILDING
+## -------CURRENTLY BUILDING-------
 
 ## About
 
