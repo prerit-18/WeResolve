@@ -4,7 +4,7 @@ import { Search, ChevronLeft, ChevronRight, MoreVertical, ImageOff } from 'lucid
 const categoryStyles = {
   'Road Damage': 'bg-secondary/10 text-secondary border-secondary/20',
   'Garbage': 'bg-green-50 text-green-700 border-green-100',
-  'Street Light': 'bg-section text-primary border-purple-100',
+  'Street Light': 'bg-section text-primary border-primary/20',
   'Water Supply': 'bg-teal-50 text-teal-700 border-teal-100',
   'Drainage': 'bg-secondary/10 text-secondary border-secondary/20',
   'Others': 'bg-slate-50 text-slate-700 border-slate-200',
@@ -20,7 +20,7 @@ const statusStyles = {
   'In Progress': 'bg-secondary/10 text-secondary border-secondary/20',
   'Resolved': 'bg-emerald-50 text-emerald-700 border-emerald-100',
   'Pending': 'bg-amber-50 text-amber-700 border-amber-100',
-  'Completed': 'bg-section text-primary border-purple-100',
+  'Completed': 'bg-section text-primary border-primary/20',
 };
 
 export default function RecentIssuesTable({ issues = [] }) {

@@ -78,7 +78,7 @@ export default function MyTasks({ refreshTrigger, triggerRefresh, onViewAll }) {
 
   const getStatusBadge = (status) => {
     if (status === 'In Progress') return 'bg-amber-100/70 text-amber-700';
-    if (status === 'Completed') return 'bg-blue-100/70 text-secondary';
+    if (status === 'Completed') return 'bg-secondary/15 text-secondary';
     if (status === 'Approved') return 'bg-green-100/70 text-green-700';
     return 'bg-red-100/70 text-red-700'; // Rejected
   };

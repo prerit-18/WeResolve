@@ -9,22 +9,22 @@ export default {
       colors: {
         brand: {
           50: '#F0FDFD', // light teal tint
-          100: '#E2E8F0', // border (light gray/teal shade)
-          200: '#CBD5E1', // hover border
-          300: '#64748B', // muted
-          400: '#475569', // text
+          100: '#E6F4F4', // teal border/tint
+          200: '#CCFBF1',
+          300: '#99F6E4',
+          400: '#2DD4BF',
           500: '#0F9D9A', // Primary brand (Deep Teal)
           600: '#0C7C79', // Primary hover (Dark Teal)
-          700: '#2563EB', // Secondary brand (Royal Blue)
-          800: '#1D4ED8', // Secondary hover (Blue)
+          700: '#0A6664',
+          800: '#085351',
           900: '#0F172A', // Heading
         },
-        primary: "#0F9D9A",
-        primaryDark: "#0C7C79",
-        secondary: "#2563EB",
-        secondaryDark: "#1D4ED8",
+        primary: "#0F9D9A", // Deep Teal
+        primaryDark: "#0C7C79", // Dark Teal
+        secondary: "#0D8B88", // Medium Teal
+        secondaryDark: "#0A6E6B", // Darker Teal
         background: "#F8FAFC",
-        section: "#EFF6FF",
+        section: "#F0FDFD", // Soft light teal section background
         card: "#FFFFFF",
         heading: "#0F172A",
         text: "#475569",

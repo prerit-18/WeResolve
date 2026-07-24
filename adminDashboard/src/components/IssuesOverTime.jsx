@@ -129,7 +129,7 @@ export default function IssuesOverTime({ data = [] }) {
               cx={pt.x}
               cy={pt.y}
               r={3.5}
-              className="fill-white stroke-blue-500"
+              className="fill-white stroke-secondary"
               strokeWidth={2}
             />
           ))}

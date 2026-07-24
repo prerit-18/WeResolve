@@ -214,7 +214,7 @@ export default function App() {
                     </div>
                     <div className="flex items-center justify-between sm:justify-end gap-4 text-xs pt-2 sm:pt-0 border-t border-slate-200/50 sm:border-t-0">
                       <span className="text-green-600 font-black">{usr.credits} Credits</span>
-                      <span className="px-2.5 py-1 bg-section text-primary font-extrabold rounded-lg border border-purple-100">Level {usr.level}</span>
+                      <span className="px-2.5 py-1 bg-section text-primary font-extrabold rounded-lg border border-primary/20">Level {usr.level}</span>
                     </div>
                   </div>
                 ))}

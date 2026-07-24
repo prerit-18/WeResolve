@@ -62,7 +62,7 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
                   onClick={() => setShowUsersDropdown(!showUsersDropdown)}
                   className={`flex items-center gap-3.5 px-4 py-2.5 rounded-xl cursor-pointer transition duration-150 ${
                     isUserActive
-                      ? 'bg-secondary/10 text-secondary font-extrabold border border-blue-600/20'
+                      ? 'bg-secondary/10 text-secondary font-extrabold border border-secondary/20'
                       : 'hover:bg-slate-800/60 hover:text-slate-200'
                   }`}
                 >

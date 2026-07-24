@@ -199,7 +199,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
 
                 <button 
                   onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-                  className={`px-4 py-2 border rounded-xl text-xs font-bold flex items-center gap-1.5 transition ${showAdvancedFilters ? 'bg-primary border-primary text-white' : 'bg-section/70 border-purple-100 hover:bg-purple-100/70 text-primary'}`}
+                  className={`px-4 py-2 border rounded-xl text-xs font-bold flex items-center gap-1.5 transition ${showAdvancedFilters ? 'bg-primary border-primary text-white' : 'bg-section/70 border-primary/20 hover:bg-primary/10 text-primary'}`}
                 >
                   <Filter className="w-3.5 h-3.5" strokeWidth={2.2} />
                   <span>Filters</span>
@@ -250,7 +250,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
 
               {/* Load More Button */}
               <div className="flex justify-center mt-6">
-                <button className="text-primary hover:text-primaryDark text-xs font-bold flex items-center gap-1 bg-section hover:bg-purple-100/70 px-4 py-2.5 rounded-xl transition">
+                <button className="text-primary hover:text-primaryDark text-xs font-bold flex items-center gap-1 bg-section hover:bg-primary/10 px-4 py-2.5 rounded-xl transition">
                   <span>Load more issues</span>
                   <ChevronDown className="w-3.5 h-3.5" />
                 </button>
@@ -303,7 +303,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
 
               <button 
                 onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-                className={`px-4 py-2 border rounded-xl text-xs font-bold flex items-center gap-1.5 transition ${showAdvancedFilters ? 'bg-primary border-primary text-white' : 'bg-section/70 border-purple-100 hover:bg-purple-100/70 text-primary'}`}
+                className={`px-4 py-2 border rounded-xl text-xs font-bold flex items-center gap-1.5 transition ${showAdvancedFilters ? 'bg-primary border-primary text-white' : 'bg-section/70 border-primary/20 hover:bg-primary/10 text-primary'}`}
               >
                 <Filter className="w-3.5 h-3.5" strokeWidth={2.2} />
                 <span>Filters</span>
@@ -406,7 +406,7 @@ export default function Dashboard({ user, onLogout, refreshTrigger, triggerRefre
                   <div
                     key={n.id}
                     className={`p-4 rounded-xl border transition-all ${
-                      n.read ? 'bg-slate-50/50 border-slate-100 text-slate-600' : 'bg-section/40 border-purple-100/80 text-slate-900 font-semibold shadow-xs'
+                      n.read ? 'bg-slate-50/50 border-slate-100 text-slate-600' : 'bg-section/40 border-primary/20 text-slate-900 font-semibold shadow-xs'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-3">

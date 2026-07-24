@@ -120,7 +120,7 @@ export default function PendingVerifications({ verifications = [], onVerifySucce
 
       <button 
         onClick={onViewAll}
-        className="w-full mt-6 bg-secondary/10 hover:bg-blue-100 text-secondary font-bold py-3 rounded-xl transition text-xs flex items-center justify-center gap-1.5"
+        className="w-full mt-6 bg-secondary/10 hover:bg-secondary/15 text-secondary font-bold py-3 rounded-xl transition text-xs flex items-center justify-center gap-1.5"
       >
         <span>View All Verifications</span>
         <ArrowRight className="w-3.5 h-3.5" />

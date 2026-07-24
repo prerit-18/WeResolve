@@ -56,7 +56,7 @@ export default function TopSolvers({ onViewAll }) {
 
       <button 
         onClick={onViewAll}
-        className="w-full mt-5 bg-section hover:bg-purple-100/80 text-primary font-bold py-2.5 rounded-xl transition text-xs flex items-center justify-center gap-1"
+        className="w-full mt-5 bg-section hover:bg-primary/10 text-primary font-bold py-2.5 rounded-xl transition text-xs flex items-center justify-center gap-1"
       >
         <span>View Full Leaderboard</span>
         <ChevronRight className="w-3.5 h-3.5" />

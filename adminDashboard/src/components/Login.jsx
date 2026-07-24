@@ -38,21 +38,21 @@ export default function Login({ onLoginSuccess }) {
       email: 'admin@weresolve.gov',
       pass: 'admin123',
       label: 'Admin',
-      color: 'text-blue-500 hover:text-secondary',
+      color: 'text-secondary hover:text-secondary',
       badgeBg: 'bg-secondary'
     },
     citizen: {
       email: 'citizen@weresolve.org',
       pass: 'citizen123',
       label: 'Citizen',
-      color: 'text-indigo-500 hover:text-secondary',
+      color: 'text-secondary hover:text-secondary',
       badgeBg: 'bg-secondary'
     },
     solver: {
       email: 'arjun@weresolve.org',
       pass: 'arjun123',
       label: 'Solver',
-      color: 'text-purple-500 hover:text-primary',
+      color: 'text-primary hover:text-primary',
       badgeBg: 'bg-primary'
     }
   };
@@ -130,9 +130,9 @@ export default function Login({ onLoginSuccess }) {
     solver: {
       accent: 'purple',
       btnBg: 'bg-primary hover:bg-primaryDark shadow-primary/20',
-      borderFocus: 'focus:border-primary focus:ring-purple-600/20',
-      textAccent: 'text-purple-400',
-      badgeBg: 'bg-primary/10 text-purple-400 border-purple-500/20',
+      borderFocus: 'focus:border-primary focus:ring-primary/20',
+      textAccent: 'text-primary',
+      badgeBg: 'bg-primary/10 text-primary border-primary/20',
       gradient: 'from-primary/20 to-transparent'
     },
     admin: {
@@ -140,7 +140,7 @@ export default function Login({ onLoginSuccess }) {
       btnBg: 'bg-secondary hover:bg-secondaryDark shadow-secondary/20',
       borderFocus: 'focus:border-secondary focus:ring-secondary/20',
       textAccent: 'text-secondary',
-      badgeBg: 'bg-secondary/10 text-secondary border-blue-500/20',
+      badgeBg: 'bg-secondary/10 text-secondary border-secondary/20',
       gradient: 'from-secondary/20 to-transparent'
     }
   };
@@ -151,7 +151,7 @@ export default function Login({ onLoginSuccess }) {
     <div className="min-h-screen bg-[#0b0f19] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-500 font-sans">
       {/* Decorative gradient blur */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl -z-10 pointer-events-none animate-pulse"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-section0/10 rounded-full blur-3xl -z-10 pointer-events-none animate-pulse duration-500"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-section rounded-full blur-3xl -z-10 pointer-events-none animate-pulse duration-500"></div>
 
       <div className="max-w-md w-full space-y-6 sm:space-y-8 bg-[#111827]/80 backdrop-blur-xl p-5 sm:p-8 border border-slate-800 rounded-3xl shadow-2xl relative overflow-hidden">
         {/* Subtle top role-specific gradient border glow */}
@@ -207,7 +207,7 @@ export default function Login({ onLoginSuccess }) {
               onClick={() => { setActiveTab('admin'); setError(''); }}
               className={`flex-1 py-2.5 rounded-xl text-xs font-black tracking-wide transition-all duration-300 flex items-center justify-center gap-1.5 ${
                 activeTab === 'admin'
-                  ? 'bg-secondary text-white shadow-lg shadow-blue-500/15'
+                  ? 'bg-secondary text-white shadow-lg shadow-secondary/15'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-[#1f2937]/40'
               }`}
             >
@@ -304,21 +304,21 @@ export default function Login({ onLoginSuccess }) {
                 <button
                   type="button"
                   onClick={() => handleQuickSeed('citizen')}
-                  className="px-2 py-0.5 rounded bg-secondary/10 text-secondary font-extrabold border border-secondary/20 hover:bg-secondary/100/20 transition"
+                  className="px-2 py-0.5 rounded bg-secondary/10 text-secondary font-extrabold border border-secondary/20 hover:bg-secondary/20 transition"
                 >
                   Citizen
                 </button>
                 <button
                   type="button"
                   onClick={() => handleQuickSeed('solver')}
-                  className="px-2 py-0.5 rounded bg-section0/10 text-purple-400 font-extrabold border border-purple-500/20 hover:bg-section0/20 transition"
+                  className="px-2 py-0.5 rounded bg-section text-primary font-extrabold border border-primary/20 hover:bg-section transition"
                 >
                   Solver
                 </button>
                 <button
                   type="button"
                   onClick={() => handleQuickSeed('admin')}
-                  className="px-2 py-0.5 rounded bg-secondary/10 text-secondary font-extrabold border border-blue-500/20 hover:bg-secondary/100/20 transition"
+                  className="px-2 py-0.5 rounded bg-secondary/10 text-secondary font-extrabold border border-secondary/20 hover:bg-secondary/20 transition"
                 >
                   Admin
                 </button>

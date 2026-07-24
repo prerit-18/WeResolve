@@ -3,7 +3,7 @@ import { MapPin, Construction, Trash2, Lightbulb, Map, ChevronRight, HelpCircle 
 const iconMap = {
   pothole: { Icon: Construction, bg: 'bg-rose-50', color: 'text-rose-500' },
   garbage: { Icon: Trash2, bg: 'bg-amber-50', color: 'text-amber-500' },
-  light: { Icon: Lightbulb, bg: 'bg-secondary/10', color: 'text-indigo-500' },
+  light: { Icon: Lightbulb, bg: 'bg-secondary/10', color: 'text-secondary' },
   default: { Icon: HelpCircle, bg: 'bg-slate-50', color: 'text-slate-500' },
 }
 

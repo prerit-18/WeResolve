@@ -4,7 +4,7 @@ const alertIcons = {
   alert: { Icon: ShieldAlert, color: 'text-red-500 bg-red-50 border-red-100' },
   warning: { Icon: AlertCircle, color: 'text-amber-500 bg-amber-50 border-amber-100' },
   success: { Icon: CheckCircle, color: 'text-green-500 bg-green-50 border-green-100' },
-  info: { Icon: BellRing, color: 'text-blue-500 bg-secondary/10 border-secondary/20' },
+  info: { Icon: BellRing, color: 'text-secondary bg-secondary/10 border-secondary/20' },
   default: { Icon: Bell, color: 'text-slate-500 bg-slate-50 border-slate-100' },
 };
 
